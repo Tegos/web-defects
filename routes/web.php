@@ -12,3 +12,11 @@
 */
 
 Route::get('/', 'HomeController@index');
+
+Route::get('/public', function () {
+	return Redirect::to('/');
+});
+
+Route::post('upload', 'ImageController@upload');
+
+Route::get('/image/{id}', 'ImageController@index');
