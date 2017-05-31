@@ -32,7 +32,8 @@ class ImageController extends Controller
 		$url = \Storage::disk('public')->url($new_file_path);
 		$path = public_path($url);
 
-		//dd($path);
+		var_dump($path);
+
 
 		return view('image', $data);
 	}
