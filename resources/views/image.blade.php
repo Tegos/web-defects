@@ -34,19 +34,26 @@
 				<div class="row uniform">
 					<div class="12u$">
 							<span class="image fit">
-								<img src="{{$image->image_edit}}" alt=""/>
+								<img src="{{$image_edit}}" alt=""/>
 							</span>
 					</div>
 
 				</div>
+			</section>
 
+			<div class="row uniform">
+				<div class="12u$">
+					<div class="inner">
+						<ul class="actions">
+							<li><a id="loadImage" href="#one" class="button scrolly">Далі</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
 
-				<ul class="actions">
-					<li><a id="loadImage" href="#one" class="button scrolly">Далі</a></li>
-				</ul>
 		</div>
-	</section>
 
+	</section>
 </div>
 
 @include('static.footer')

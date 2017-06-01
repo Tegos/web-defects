@@ -18,21 +18,27 @@ class ImageController extends Controller
 		$file_path = public_path() . $image_data->image;
 
 		$img = Image::make($file_path);
+		$relative_path = '/uploads/' . $id . '.png';
 
 		$img->invert();
-		$new_file_path = public_path() . '/uploads/' . $id . '.png';
+		$new_file_path = public_path() . $relative_path;
 		$img->save($new_file_path);
 
 		//dd($id);
 		//dd($image_data);
 		$data = [];
 		$data['image'] = $image_data;
-		$data['image_edit'] = \Storage::url($new_file_path, 'public');
+		$data['image_edit'] = $relative_path;
 
-		$url = \Storage::disk('public')->url($new_file_path);
-		$path = public_path($url);
+		$p = substr(str_replace('\\', '/',
+			realpath(dirname(__FILE__))),
+			strlen(str_replace('\\', '/', realpath($_SERVER['DOCUMENT_ROOT']))));
+		//$url = \Storage::disk('public')->url($new_file_path);
+		//$path = public_path($url);
 
-		var_dump($path);
+		//var_dump($new_file_path);
+		//var_dump($p);
+		//var_dump($path);
 
 
 		return view('image', $data);
