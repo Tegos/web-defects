@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Input as Input;
 use Illuminate\Support\Facades\Redirect;
 use \App\Image as ImageModel;
 use Intervention\Image\ImageManagerStatic as Image;
+use \App\Image\ImageGrid;
 
 class ImageController extends Controller
 {
@@ -59,6 +60,21 @@ class ImageController extends Controller
 		} else {
 			return Redirect::to('/');
 		}
+
+	}
+
+	public function demoGrid()
+	{
+		$id = (int)9;
+		$image_data = ImageModel::find($id);
+
+		$file_path = public_path() . $image_data->image;
+		$imageGrid = new ImageGrid ($file_path, 5, 20);
+		$imageGrid->demoGrid();
+		header("Content-Type: image/png");
+		imagepng($imageGrid->getImage());
+
+		exit;
 
 	}
 }

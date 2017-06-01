@@ -20,3 +20,4 @@ Route::get('/public', function () {
 Route::post('upload', 'ImageController@upload');
 
 Route::get('/image/{id}', 'ImageController@index');
+Route::get('/demoGrid', 'ImageController@demoGrid');
