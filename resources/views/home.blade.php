@@ -37,7 +37,7 @@
 
 					<div class="row uniform">
 						<div class="12u$">
-							<input name="image" type="file" accept="image/*" id="imgInp"/>
+							<input name="image" type="file" accept="image/gif, image/jpeg, image/png" id="imgInp"/>
 						</div>
 					</div>
 					<div class="row uniform">

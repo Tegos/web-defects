@@ -21,7 +21,7 @@ class ImageGrid extends \App\Image\AbstractImage
 	public function addGridToImage()
 	{
 		$black = imagecolorallocate($this->image, 0, 0, 0);
-		imagesetthickness($this->image, 3);
+		imagesetthickness($this->image, 2);
 		$cellWidth = ($this->realWidth - 1) / $this->gridWidth;   // note: -1 to avoid writting
 		$cellHeight = ($this->realHeight - 1) / $this->gridHeight; // a pixel outside the image
 		for ($x = 0; ($x <= $this->gridWidth); $x++) {
