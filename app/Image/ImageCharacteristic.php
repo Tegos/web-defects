@@ -1,22 +1,37 @@
 <?php
 
 namespace App\Image;
-class ImageGrid extends \App\Image\AbstractImage
+class ImageCharacteristic
 {
 
+	private $realWidth;
+	private $realHeight;
 	private $gridWidth;
 	private $gridHeight;
+	private $image;
 
 	public function __construct($image_path, $gridWidth, $gridHeight)
 	{
+		$image = imagecreatefromstring(file_get_contents($image_path));
+		$realWidth = imagesx($image);
+		$realHeight = imagesy($image);
+		$this->realWidth = $realWidth;
+		$this->realHeight = $realHeight;
 		$this->gridWidth = $gridWidth;
 		$this->gridHeight = $gridHeight;
 
-		parent::__construct($image_path);
+		// create destination image
+		$this->image = $image;
 
-
+		// set image default background
+		$white = imagecolorallocate($this->image, 255, 255, 255);
+		imagefill($this->image, 0, 0, $white);
 	}
 
+	public function __destruct()
+	{
+		imagedestroy($this->image);
+	}
 
 	public function addGridToImage()
 	{
@@ -30,6 +45,22 @@ class ImageGrid extends \App\Image\AbstractImage
 				imageline($this->image, 0, ($y * $cellHeight), $this->realWidth, ($y * $cellHeight), $black);
 			}
 		}
+	}
+
+	public function getImage()
+	{
+		return $this->image;
+	}
+
+	public function displayImage()
+	{
+		header("Content-type: image/png");
+		imagepng($this->getImage());
+	}
+
+	public function saveImageToFile($path)
+	{
+		imagepng($this->getImage(), $path, 9);
 	}
 
 }
