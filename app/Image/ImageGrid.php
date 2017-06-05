@@ -21,7 +21,6 @@ class ImageGrid
 		$this->gridHeight = $gridHeight;
 
 		// create destination image
-		//$this->image = imagecreatetruecolor($realWidth, $realHeight);
 		$this->image = $image;
 
 		// set image default background
@@ -34,7 +33,7 @@ class ImageGrid
 		imagedestroy($this->image);
 	}
 
-	public function demoGrid()
+	public function addGridToImage()
 	{
 		$black = imagecolorallocate($this->image, 0, 0, 0);
 		imagesetthickness($this->image, 3);
@@ -53,10 +52,15 @@ class ImageGrid
 		return $this->image;
 	}
 
-	public function display()
+	public function displayImage()
 	{
 		header("Content-type: image/png");
-		imagepng($this->image);
+		imagepng($this->getImage());
+	}
+
+	public function saveImageToFile($path)
+	{
+		imagepng($this->getImage(), $path, 9);
 	}
 
 }

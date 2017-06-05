@@ -34,7 +34,7 @@
 				<div class="row uniform">
 					<div class="12u$">
 							<span class="image fit">
-								<img src="{{$image_edit}}" alt=""/>
+								<img src="{{$image_grid}}" alt=""/>
 							</span>
 					</div>
 
