@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Image;
-class ImageGrid extends \App\Image\AbstractImage
+class ImageGrid extends AbstractImage
 {
 
 	private $gridWidth;

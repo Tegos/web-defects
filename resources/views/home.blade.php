@@ -48,11 +48,11 @@
 					<div class="row uniform">
 						<div class="6u 12u$(xsmall)">
 							<input type="number" name="divide_n"
-							       id="divide_n" value="20" placeholder="N"/>
+							       id="divide_n" value="3" placeholder="N"/>
 						</div>
 						<div class="6u$ 12u$(xsmall)">
 							<input type="number" name="divide_m"
-							       id="divide_m" value="20" placeholder="M"/>
+							       id="divide_m" value="3" placeholder="M"/>
 						</div>
 					</div>
 					<div class="row uniform">
@@ -71,7 +71,6 @@
 					<input type="hidden" value="{{ csrf_token() }}" name="_token"/>
 				</form>
 			</section>
-
 
 			<ul class="actions">
 				<li><a id="loadImage" href="#one" class="button scrolly">Далі</a></li>

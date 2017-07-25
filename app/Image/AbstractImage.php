@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Image;
-abstract class AbstractImage
+abstract class AbstractImage extends ImageHelper
 {
 
 	protected $realWidth;
@@ -44,5 +44,6 @@ abstract class AbstractImage
 	{
 		imagepng($this->getImage(), $path, $quality);
 	}
+
 
 }

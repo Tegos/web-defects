@@ -28,6 +28,12 @@ class ImageController extends Controller
 		$imageGrid = new ImageGrid (
 			$new_file_path, $image_data->divide_n, $image_data->divide_m
 		);
+
+
+		$hsl = $imageGrid->rgb2hsl([230, 34, 90]);
+		//dd($hsl);
+
+
 		$imageGrid->addGridToImage();
 		$file_path_with_grid = '/uploads/' . $id . '_grid.png';
 		$imageGrid->saveImageToFile(public_path() . $file_path_with_grid);
@@ -80,9 +86,7 @@ class ImageController extends Controller
 	{
 		$id = (int)9;
 		$image_data = ImageModel::find($id);
-
 		$file_path = public_path() . $image_data->image;
-
 
 		exit;
 
