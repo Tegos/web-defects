@@ -32,4 +32,75 @@ class ImageGrid extends AbstractImage
 		}
 	}
 
+	public function putImage($img, $sizeW, $sizeH, $posX, $posY)
+	{
+		// Cell width
+		$cellWidth = $this->realWidth / $this->gridWidth;
+		$cellHeight = $this->realHeight / $this->gridHeight;
+
+		// Conversion of our virtual sizes/positions to real ones
+		$realSizeW = ceil($cellWidth * $sizeW);
+		$realSizeH = ceil($cellHeight * $sizeH);
+		$realPosX = ($cellWidth * $posX);
+		$realPosY = ($cellHeight * $posY);
+
+		$img = $this->resizePreservingAspectRatio($img, $realSizeW, $realSizeH);
+
+		// Copying the image
+		imagecopyresampled($this->image, $img, $realPosX, $realPosY, 0, 0, $realSizeW, $realSizeH, imagesx($img), imagesy($img));
+	}
+
+	public function resizePreservingAspectRatio($img, $targetWidth, $targetHeight)
+	{
+		$srcWidth = imagesx($img);
+		$srcHeight = imagesy($img);
+
+		$srcRatio = $srcWidth / $srcHeight;
+		$targetRatio = $targetWidth / $targetHeight;
+		if (($srcWidth <= $targetWidth) && ($srcHeight <= $targetHeight))
+		{
+			$imgTargetWidth = $srcWidth;
+			$imgTargetHeight = $srcHeight;
+		}
+		else if ($targetRatio > $srcRatio)
+		{
+			$imgTargetWidth = (int) ($targetHeight * $srcRatio);
+			$imgTargetHeight = $targetHeight;
+		}
+		else
+		{
+			$imgTargetWidth = $targetWidth;
+			$imgTargetHeight = (int) ($targetWidth / $srcRatio);
+		}
+
+		$targetImg = imagecreatetruecolor($targetWidth, $targetHeight);
+
+		imagecopyresampled(
+			$targetImg,
+			$img,
+			($targetWidth - $imgTargetWidth) / 2, // centered
+			($targetHeight - $imgTargetHeight) / 2, // centered
+			0,
+			0,
+			$imgTargetWidth,
+			$imgTargetHeight,
+			$srcWidth,
+			$srcHeight
+		);
+
+		return $targetImg;
+	}
+
+
+	/**
+	 * @param int $m - row
+	 * @param int $n - column
+	 */
+	public function getImageByPosition($m = 0 , $n = 0 ){
+		// Todo: implement method that returned separate image
+		// Cell width
+		$cellWidth = $this->realWidth / $this->gridWidth;
+		$cellHeight = $this->realHeight / $this->gridHeight;
+	}
+
 }
