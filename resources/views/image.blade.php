@@ -37,7 +37,14 @@
 								<img src="{{$image_grid}}" alt=""/>
 							</span>
 					</div>
+				</div>
 
+				<div class="row uniform">
+					<div class="12u$">
+
+						<img src="{{$image_crop}}" alt=""/>
+
+					</div>
 				</div>
 			</section>
 

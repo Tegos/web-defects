@@ -38,6 +38,10 @@ class ImageController extends Controller
 		$file_path_with_grid = '/uploads/' . $id . '_grid.png';
 		$imageGrid->saveImageToFile(public_path() . $file_path_with_grid);
 
+		$file_path_crop = '/uploads/' . $id . '_grid_crop.png';
+		$crop = $imageGrid->getImageByPosition(2, 2);
+		$imageGrid->saveImageToFile(public_path() . $file_path_crop, $crop);
+
 
 		//dd($id);
 		//dd($image_data);
@@ -45,6 +49,7 @@ class ImageController extends Controller
 		$data['image'] = $image_data;
 		$data['image_edit'] = $relative_path;
 		$data['image_grid'] = $file_path_with_grid;
+		$data['image_crop'] = $file_path_crop;
 
 		$p = substr(str_replace('\\', '/',
 			realpath(dirname(__FILE__))),

@@ -34,15 +34,23 @@ abstract class AbstractImage extends ImageHelper
 		return $this->image;
 	}
 
-	public function displayImage()
+	public function displayImage($image = null)
 	{
 		header("Content-type: image/png");
-		imagepng($this->getImage());
+		if ($image) {
+			imagepng($image);
+		} else {
+			imagepng($this->getImage());
+		}
+
 	}
 
-	public function saveImageToFile($path, $quality = 9)
+	public function saveImageToFile($path, $image = null, $quality = 9)
 	{
-		imagepng($this->getImage(), $path, $quality);
+		if (!$image) {
+			$image = $this->getImage();
+		}
+		imagepng($image, $path, $quality);
 	}
 
 

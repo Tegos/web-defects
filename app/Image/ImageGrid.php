@@ -57,20 +57,15 @@ class ImageGrid extends AbstractImage
 
 		$srcRatio = $srcWidth / $srcHeight;
 		$targetRatio = $targetWidth / $targetHeight;
-		if (($srcWidth <= $targetWidth) && ($srcHeight <= $targetHeight))
-		{
+		if (($srcWidth <= $targetWidth) && ($srcHeight <= $targetHeight)) {
 			$imgTargetWidth = $srcWidth;
 			$imgTargetHeight = $srcHeight;
-		}
-		else if ($targetRatio > $srcRatio)
-		{
-			$imgTargetWidth = (int) ($targetHeight * $srcRatio);
+		} else if ($targetRatio > $srcRatio) {
+			$imgTargetWidth = (int)($targetHeight * $srcRatio);
 			$imgTargetHeight = $targetHeight;
-		}
-		else
-		{
+		} else {
 			$imgTargetWidth = $targetWidth;
-			$imgTargetHeight = (int) ($targetWidth / $srcRatio);
+			$imgTargetHeight = (int)($targetWidth / $srcRatio);
 		}
 
 		$targetImg = imagecreatetruecolor($targetWidth, $targetHeight);
@@ -95,12 +90,29 @@ class ImageGrid extends AbstractImage
 	/**
 	 * @param int $m - row
 	 * @param int $n - column
+	 * @return bool|resource
 	 */
-	public function getImageByPosition($m = 0 , $n = 0 ){
+	public function getImageByPosition($m = 0, $n = 0)
+	{
 		// Todo: implement method that returned separate image
+		// need only test
 		// Cell width
-		$cellWidth = $this->realWidth / $this->gridWidth;
-		$cellHeight = $this->realHeight / $this->gridHeight;
+		$cellWidth = ceil($this->realWidth / $this->gridWidth);
+		$cellHeight = ceil($this->realHeight / $this->gridHeight);
+		$x = $n * $cellWidth;
+		$y = $m * $cellHeight;
+		$width = $cellWidth;
+		$height = $cellHeight;
+
+		$crop = imagecrop($this->image,
+			[
+				'x' => $x,
+				'y' => $y,
+				'width' => $width,
+				'height' => $height
+			]
+		);
+		return $crop;
 	}
 
 }
