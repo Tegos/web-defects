@@ -1,0 +1,1 @@
+An m×n matrix has m rows and n columns.

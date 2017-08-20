@@ -34,6 +34,23 @@ abstract class AbstractImage extends ImageHelper
 		return $this->image;
 	}
 
+	public function setImage($image)
+	{
+		if (mb_strtolower(get_resource_type($image)) === 'gd') {
+			$this->image = $image;
+			$this->updateDimension();
+		}
+	}
+
+	public function updateDimension()
+	{
+		$image = $this->image;
+		$realWidth = imagesx($image);
+		$realHeight = imagesy($image);
+		$this->realWidth = $realWidth;
+		$this->realHeight = $realHeight;
+	}
+
 	public function displayImage($image = null)
 	{
 		header("Content-type: image/png");

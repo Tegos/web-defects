@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+
 use Illuminate\Support\Facades\Input as Input;
 use Illuminate\Support\Facades\Redirect;
 use \App\Image as ImageModel;
+use \App\Image\ImageCharacteristic;
 use Intervention\Image\ImageManagerStatic as Image;
 use \App\Image\ImageGrid;
 
@@ -30,17 +31,25 @@ class ImageController extends Controller
 		);
 
 
-		$hsl = $imageGrid->rgb2hsl([230, 34, 90]);
-		//dd($hsl);
-
-
 		$imageGrid->addGridToImage();
 		$file_path_with_grid = '/uploads/' . $id . '_grid.png';
 		$imageGrid->saveImageToFile(public_path() . $file_path_with_grid);
 
-		$file_path_crop = '/uploads/' . $id . '_grid_crop.png';
-		$crop = $imageGrid->getImageByPosition(2, 2);
-		$imageGrid->saveImageToFile(public_path() . $file_path_crop, $crop);
+		// divided images
+		$n = $image_data->divide_n; // cols
+		$m = $image_data->divide_m; // rows
+
+		$imageCharacteristic = new ImageCharacteristic();
+		for ($i = 0; $i < $n; $i++) {
+			for ($j = 0; $j < $m; $j++) {
+				$file_path_crop = "/uploads/{$id}_{$i}_{$j}_grid_crop.png";
+				$crop = $imageGrid->getImageByPosition($j, $i);
+				$imageGrid->saveImageToFile(public_path() . $file_path_crop, $crop);
+
+				$imageCharacteristic->setImage($crop);
+				$intensity = $imageCharacteristic->getIntensity();
+			}
+		}
 
 
 		//dd($id);
@@ -89,10 +98,46 @@ class ImageController extends Controller
 
 	public function demoGrid()
 	{
-		$id = (int)9;
+		$id = (int)19;
 		$image_data = ImageModel::find($id);
+
 		$file_path = public_path() . $image_data->image;
 
+		$img = Image::make($file_path);
+		$relative_path = '/uploads/' . $id . '.png';
+
+		$img->greyscale();
+		$new_file_path = public_path() . $relative_path;
+		$img->save($new_file_path);
+
+		$imageGrid = new ImageGrid (
+			$new_file_path, $image_data->divide_n, $image_data->divide_m
+		);
+
+
+		$imageGrid->addGridToImage();
+		$file_path_with_grid = '/uploads/' . $id . '_grid.png';
+		$imageGrid->saveImageToFile(public_path() . $file_path_with_grid);
+
+		$file_path_crop = '/uploads/' . $id . '_grid_crop.png';
+		$crop = $imageGrid->getImageByPosition(2, 2);
+		$imageGrid->saveImageToFile(public_path() . $file_path_crop, $crop);
+
+		$imageCharacteristic = new ImageCharacteristic();
+
+		$imageCharacteristic->setImage($crop);
+
+		$intensity = $imageCharacteristic->getIntensity();
+
+		var_dump($intensity);
+
+		//dd($id);
+		//dd($image_data);
+		$data = [];
+		$data['image'] = $image_data;
+		$data['image_edit'] = $relative_path;
+		$data['image_grid'] = $file_path_with_grid;
+		$data['image_crop'] = $file_path_crop;
 		exit;
 
 	}

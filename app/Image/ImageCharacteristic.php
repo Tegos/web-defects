@@ -4,30 +4,30 @@ namespace App\Image;
 class ImageCharacteristic extends AbstractImage
 {
 
-	private $realWidth;
-	private $realHeight;
-	private $gridWidth;
-	private $gridHeight;
-	private $image;
-
-	public function __construct($image_path, $gridWidth, $gridHeight)
+	public function __construct()
 	{
-		$image = imagecreatefromstring(file_get_contents($image_path));
-		$realWidth = imagesx($image);
-		$realHeight = imagesy($image);
-		$this->realWidth = $realWidth;
-		$this->realHeight = $realHeight;
-		$this->gridWidth = $gridWidth;
-		$this->gridHeight = $gridHeight;
 
-		// create destination image
-		$this->image = $image;
-
-		// set image default background
-		$white = imagecolorallocate($this->image, 255, 255, 255);
-		imagefill($this->image, 0, 0, $white);
 	}
 
+	public function getIntensity()
+	{
+		$image = $this->image;
+		$width = imagesx($image);
+		$height = imagesy($image);
+		$concentration_sum = 0;
+		for ($hi = 0; $hi < $height; $hi++) {
+			for ($we = 0; $we < $width; $we++) {
+				$color_index = imagecolorat($image, $we, $hi);
+				$color = imagecolorsforindex($image, $color_index); //колір пікселя
+				$concentration = round(($color['red'] + $color['green'] + $color['blue']) / 3); //концентрація
+				$concentration_sum += $concentration; //загальна концентрація
+			}
+		}
+		$intensity = round($concentration_sum / ($width * $height)); //інтенсивність
+
+		return $intensity;
+
+	}
 
 
 }
