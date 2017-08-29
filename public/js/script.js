@@ -5,10 +5,10 @@
 function readURL(input) {
 
 	if (input.files && input.files[0]) {
-		var reader = new FileReader();
+		let reader = new FileReader();
 
 		reader.onload = function (e) {
-			var img = $('#preview_image');
+			let img = $('#preview_image');
 			img.attr('src', e.target.result);
 			img.show();
 		};

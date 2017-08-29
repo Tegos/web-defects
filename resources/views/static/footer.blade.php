@@ -2,7 +2,7 @@
 <footer id="footer" class="wrapper style1-alt">
 	<div class="inner">
 		<ul class="menu">
-			<li>&copy; Михавко Іван.</li>
+			<li>&copy; Михавко Іван</li>
 			<li>Web Defect</li>
 			<li>
 				<?= date('Y'); ?>
@@ -23,6 +23,8 @@
 
 <script src="/js/script.js"></script>
 <script src="/js/image/first.js"></script>
+
+@yield('scripts')
 
 </body>
 </html>

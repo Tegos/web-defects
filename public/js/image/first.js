@@ -4,6 +4,6 @@
 
 
 
-$("#loadImage").click(function () {
+$('#loadImage').click(function () {
 	$('#formImage').submit();
 });

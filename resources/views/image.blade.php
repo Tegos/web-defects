@@ -43,11 +43,11 @@
 					<div class="12u$">
 						<h2>Інтенсивність</h2>
 						<div class="table-wrapper">
-							<table class="table table-bordered">
+							<table class="table table-bordered" id="table_intensity">
 								<thead>
 								<tr>
 									<th>Зображення</th>
-									<th>Значення</th>
+									<th>Графік</th>
 								</tr>
 								</thead>
 								<tbody>
@@ -58,8 +58,9 @@
 											<img height="200" alt="{{ $cropped_image['image'] }}"
 											     src="{{ $cropped_image['image'] }}"/>
 										</td>
-										<td class="text-center">
-											<b>{{ $cropped_image['intensity'] }}</b>
+										<td class="text-center column_graph"
+										    data-position="{{ $cropped_image['position'] }}">
+											<div class="graph_intensity" id="graph_intensity_{{ $cropped_image['position'] }}"></div>
 										</td>
 									</tr>
 								@empty
@@ -87,4 +88,10 @@
 	</section>
 </div>
 
+@section('scripts')
+	<script src="https://code.highcharts.com/highcharts.js"></script>
+	<script src="/js/image/draw_graph.js"></script>
+@stop
+
 @include('static.footer')
+

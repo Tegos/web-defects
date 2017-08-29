@@ -26,12 +26,10 @@ class ImageIntensity extends Controller
 		//var_dump($file_path_crop);
 
 		$imageCharacteristic->setImageByPath(public_path() . $file_path_crop);
-		$intensity = $imageCharacteristic->getIntensity();
-		$cropped_images[] = [
-			'image' => $file_path_crop,
-			'intensity' => $intensity
-		];
+		$intensityByRow = $imageCharacteristic->getIntensityByRow();
 
-		dd($cropped_images);
+
+		//dd($intensityByRow);
+		return response()->json($intensityByRow);
 	}
 }

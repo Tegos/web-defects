@@ -51,7 +51,8 @@ class ImageController extends Controller
 				$intensity = $imageCharacteristic->getIntensity();
 				$cropped_images[] = [
 					'image' => $file_path_crop,
-					'intensity' => $intensity
+					'intensity' => $intensity,
+					'position' => "{$j}_{$i}"
 				];
 			}
 		}
