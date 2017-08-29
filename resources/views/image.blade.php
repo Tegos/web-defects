@@ -41,8 +41,32 @@
 
 				<div class="row uniform">
 					<div class="12u$">
+						<h2>Інтенсивність</h2>
+						<div class="table-wrapper">
+							<table class="table table-bordered">
+								<thead>
+								<tr>
+									<th>Зображення</th>
+									<th>Значення</th>
+								</tr>
+								</thead>
+								<tbody>
 
-						<img src="{{$image_crop}}" alt=""/>
+								@forelse ($cropped_images as $cropped_image)
+									<tr>
+										<td class="text-center">
+											<img height="200" alt="{{ $cropped_image['image'] }}"
+											     src="{{ $cropped_image['image'] }}"/>
+										</td>
+										<td class="text-center">
+											<b>{{ $cropped_image['intensity'] }}</b>
+										</td>
+									</tr>
+								@empty
+								@endforelse
+								</tbody>
+							</table>
+						</div>
 
 					</div>
 				</div>

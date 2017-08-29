@@ -39,6 +39,7 @@ class ImageController extends Controller
 		$n = $image_data->divide_n; // cols
 		$m = $image_data->divide_m; // rows
 
+		$cropped_images = [];
 		$imageCharacteristic = new ImageCharacteristic();
 		for ($i = 0; $i < $n; $i++) {
 			for ($j = 0; $j < $m; $j++) {
@@ -48,6 +49,10 @@ class ImageController extends Controller
 
 				$imageCharacteristic->setImage($crop);
 				$intensity = $imageCharacteristic->getIntensity();
+				$cropped_images[] = [
+					'image' => $file_path_crop,
+					'intensity' => $intensity
+				];
 			}
 		}
 
@@ -58,7 +63,7 @@ class ImageController extends Controller
 		$data['image'] = $image_data;
 		$data['image_edit'] = $relative_path;
 		$data['image_grid'] = $file_path_with_grid;
-		$data['image_crop'] = $file_path_crop;
+		$data['cropped_images'] = $cropped_images;
 
 		$p = substr(str_replace('\\', '/',
 			realpath(dirname(__FILE__))),
