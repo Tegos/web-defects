@@ -46,8 +46,8 @@
 							<table class="table table-bordered" id="table_intensity">
 								<thead>
 								<tr>
-									<th>Зображення</th>
-									<th>Графік</th>
+									<th width="40%" class="text-center">Зображення</th>
+									<th width="60%" class="text-center">Графік</th>
 								</tr>
 								</thead>
 								<tbody>
@@ -60,7 +60,8 @@
 										</td>
 										<td class="text-center column_graph"
 										    data-position="{{ $cropped_image['position'] }}">
-											<div class="graph_intensity" id="graph_intensity_{{ $cropped_image['position'] }}"></div>
+											<div class="graph_intensity"
+											     id="graph_intensity_{{ $cropped_image['position'] }}"></div>
 										</td>
 									</tr>
 								@empty
@@ -89,6 +90,9 @@
 </div>
 
 @section('scripts')
+	<script>
+		let imageId = '{{$image->id}}';
+	</script>
 	<script src="https://code.highcharts.com/highcharts.js"></script>
 	<script src="/js/image/draw_graph.js"></script>
 @stop

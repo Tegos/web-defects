@@ -43,7 +43,7 @@ class ImageController extends Controller
 		$imageCharacteristic = new ImageCharacteristic();
 		for ($i = 0; $i < $n; $i++) {
 			for ($j = 0; $j < $m; $j++) {
-				$file_path_crop = "/uploads/{$id}_{$i}_{$j}_grid_crop.png";
+				$file_path_crop = "/uploads/{$id}_{$j}_{$i}_grid_crop.png";
 				$crop = $imageGrid->getImageByPosition($j, $i);
 				$imageGrid->saveImageToFile(public_path() . $file_path_crop, $crop);
 
