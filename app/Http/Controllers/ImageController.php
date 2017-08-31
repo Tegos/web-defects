@@ -40,18 +40,19 @@ class ImageController extends Controller
 		$m = $image_data->divide_m; // rows
 
 		$cropped_images = [];
-		$imageCharacteristic = new ImageCharacteristic();
+		//$imageCharacteristic = new ImageCharacteristic();
 		for ($i = 0; $i < $n; $i++) {
 			for ($j = 0; $j < $m; $j++) {
 				$file_path_crop = "/uploads/{$id}_{$j}_{$i}_grid_crop.png";
 				$crop = $imageGrid->getImageByPosition($j, $i);
 				$imageGrid->saveImageToFile(public_path() . $file_path_crop, $crop);
 
-				$imageCharacteristic->setImage($crop);
-				$intensity = $imageCharacteristic->getIntensity();
+				//$imageCharacteristic->setImage($crop);
+				//$intensity = $imageCharacteristic->getIntensity();
 				$cropped_images[] = [
 					'image' => $file_path_crop,
-					'intensity' => $intensity,
+					'm' => $j,
+					'n' => $i,
 					'position' => "{$j}_{$i}"
 				];
 			}

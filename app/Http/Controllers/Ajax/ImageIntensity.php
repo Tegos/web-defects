@@ -21,7 +21,7 @@ class ImageIntensity extends Controller
 		$n = (int)$n;
 
 		$imageCharacteristic = new ImageCharacteristic();
-		$file_path_crop = "/uploads/{$id}_{$n}_{$m}_grid_crop.png";
+		$file_path_crop = "/uploads/{$id}_{$m}_{$n}_grid_crop.png";
 
 		//var_dump($file_path_crop);
 

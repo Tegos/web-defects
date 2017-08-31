@@ -46,7 +46,8 @@
 							<table class="table table-bordered" id="table_intensity">
 								<thead>
 								<tr>
-									<th width="40%" class="text-center">Зображення</th>
+									<th width="35%" class="text-center">Зображення</th>
+									<th width="5%" class="text-center">MxN</th>
 									<th width="60%" class="text-center">Графік</th>
 								</tr>
 								</thead>
@@ -57,6 +58,9 @@
 										<td class="text-center">
 											<img height="200" alt="{{ $cropped_image['image'] }}"
 											     src="{{ $cropped_image['image'] }}"/>
+										</td>
+										<td class="text-center">
+											<pre>{{ $cropped_image['m'] }}x{{ $cropped_image['n'] }}</pre>
 										</td>
 										<td class="text-center column_graph"
 										    data-position="{{ $cropped_image['position'] }}">
