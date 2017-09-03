@@ -26,7 +26,7 @@ abstract class AbstractImage extends ImageHelper
 
 	public function __destruct()
 	{
-		if (!is_null($this->image)) {
+		if ($this->isImage($this->image)) {
 			imagedestroy($this->image);
 		}
 	}
@@ -79,6 +79,14 @@ abstract class AbstractImage extends ImageHelper
 			$image = $this->getImage();
 		}
 		imagepng($image, $path, $quality);
+	}
+
+	public function isImage($image)
+	{
+		if (mb_strtolower(get_resource_type($image)) === 'gd') {
+			return true;
+		}
+		return false;
 	}
 
 

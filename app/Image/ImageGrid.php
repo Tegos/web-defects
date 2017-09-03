@@ -94,15 +94,17 @@ class ImageGrid extends AbstractImage
 	 */
 	public function getImageByPosition($m = 0, $n = 0)
 	{
-		// Todo: implement method that returned separate image
-		// need only test
 		// Cell width
-		$cellWidth = ceil($this->realWidth / $this->gridWidth);
-		$cellHeight = ceil($this->realHeight / $this->gridHeight);
+		$cellWidth = floor($this->realWidth / $this->gridWidth);
+		$cellHeight = floor($this->realHeight / $this->gridHeight);
 		$x = $n * $cellWidth;
 		$y = $m * $cellHeight;
 		$width = $cellWidth;
 		$height = $cellHeight;
+
+		//var_dump($width);
+		//var_dump($this->realWidth);
+
 
 		$crop = imagecrop($this->image,
 			[
@@ -112,6 +114,30 @@ class ImageGrid extends AbstractImage
 				'height' => $height
 			]
 		);
+
+		return $crop;
+	}
+
+	/**
+	 * Not use
+	 * @param $src
+	 * @param array $rect
+	 * @return resource
+	 */
+	public function fixCrop($src, array $rect)
+	{
+		$crop = imagecreatetruecolor($rect['width'], $rect['height']);
+		imagecopy(
+			$crop,
+			$src,
+			0,
+			0,
+			$rect['x'],
+			$rect['y'],
+			$rect['width'],
+			$rect['height']
+		);
+
 		return $crop;
 	}
 
