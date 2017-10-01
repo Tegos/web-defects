@@ -5,3 +5,33 @@
 .table > tbody > tr > td {
 	vertical-align: middle;
 }
+
+.matrix_table {
+	width: 500px;
+}
+
+.matrix_table td {
+	/*width: 30%;*/
+	/*position: relative;*/
+}
+
+.matrix_table td:after {
+	/*content: '';*/
+	/*display: block;*/
+	/*margin-top: 100%;*/
+}
+
+.matrix_table td .content {
+	/*position: absolute;*/
+	/*top: 0;*/
+	/*bottom: 0;*/
+	/*left: 0;*/
+	/*right: 0;*/
+	/*background: gold;*/
+	width: 100%;
+	text-align: center;
+}
+
+.matrix_table .main_diagonal {
+	background-color: #312450 !important;
+}

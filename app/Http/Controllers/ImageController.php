@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Image\Matrix;
 use Illuminate\Support\Facades\Input as Input;
 use Illuminate\Support\Facades\Redirect;
 use \App\Image as ImageModel;
@@ -61,14 +62,60 @@ class ImageController extends Controller
 			}
 		}
 
+		// distance matrix
+		$n = $image_data->divide_n; // cols
+		$m = $image_data->divide_m; // rows
+		$num = $n * $m;
 
-		//dd($id);
-		//dd($image_data);
+		$dataForDistance = [[]];
+		for ($i = 0; $i < $n; $i++) {
+			for ($j = 0; $j < $m; $j++) {
+				$imageCharacteristic = new ImageCharacteristic();
+				$file_path_crop = "/uploads/{$id}_{$j}_{$i}_grid_crop.png";
+
+				//var_dump($file_path_crop);
+
+				$imageCharacteristic->setImageByPath(public_path() . $file_path_crop);
+				$intensityByRow = $imageCharacteristic->getIntensityByRow();
+				$dataForDistance[$i][$j] = $intensityByRow;
+			}
+		}
+
+		// row graph identification
+		$dataGraphIdentification = [];
+		$graphCounter = 0;
+		for ($i = 0; $i < $n; $i++) {
+			for ($j = 0; $j < $m; $j++) {
+				$dataGraphIdentification[$graphCounter] = [$i, $j];
+				$graphCounter++;
+			}
+		}
+
+		//dd($dataGraphIdentification);
+
+		$graphCounter = count($dataGraphIdentification);
+		$dataForDistanceCount = [[]];
+
+		for ($graphI = 0; $graphI < $graphCounter; $graphI++) {
+			for ($graphJ = 0; $graphJ < $graphCounter; $graphJ++) {
+				$dataForDistanceCount[$graphI][$graphJ] =
+					Matrix::findDistance($graphI, $graphJ, $dataGraphIdentification, $dataForDistance);
+			}
+		}
+
+		//dd($dataForDistanceCount);
+
+
 		$data = [];
 		$data['image'] = $image_data;
 		$data['image_edit'] = $relative_path;
 		$data['image_grid'] = $file_path_with_grid;
 		$data['cropped_images'] = $cropped_images;
+
+		$data['n'] = $image_data->divide_n; // cols
+		$data['m'] = $image_data->divide_m; // rows
+		$data['matrix_distance'] = $dataForDistanceCount;
+
 
 		$p = substr(str_replace('\\', '/',
 			realpath(dirname(__FILE__))),

@@ -76,6 +76,30 @@
 
 					</div>
 				</div>
+
+				<div class="row uniform">
+					<div class="12u$">
+						<h2>Матриця відстаней між графіками</h2>
+						<div class="table-wrapper">
+							<table class="table table-bordered matrix_table" id="table_matrix_distance">
+
+								<tbody>
+								@for ($i = 0; $i < $n*$m; $i++)
+									<tr>
+										@for ($j = 0; $j < $m*$n; $j++)
+											<td class="{{($i === $j)? 'main_diagonal':''}}">
+												<div class="content">{{ $matrix_distance[$i][$j] }}</div>
+											</td>
+										@endfor
+									</tr>
+								@endfor
+
+								</tbody>
+							</table>
+						</div>
+
+					</div>
+				</div>
 			</section>
 
 			<div class="row uniform">
