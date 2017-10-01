@@ -30,19 +30,38 @@ class Matrix
 
 		return round($sum / $num, 2);
 	}
-//	public static function findDistance($i, $j, $num, array $data)
-//	{
-//
-//		$sum = 0;
-//		for ($k = 0; $k < $num; $k++) {
-//			var_dump($data[$i][$k]);
-//			var_dump($data[$j][$k]);
-//			//$diff = $data[$i][$k] - $data[$j][$k];
-//
-//			$sqr = pow(4, 2);
-//			$sum += $sqr;
-//		}
-//
-//		return ($sum / $num);
-//	}
+
+	public static function getGroups($distanceMatrix)
+	{
+		$firstGroup = [];
+
+		$num = count($distanceMatrix);
+
+		$localMins = [];
+		for ($i = 0; $i < $num; $i++) {
+			$localMins[$i] = min(array_filter($distanceMatrix[$i]));
+		}
+
+		$minimum = min($localMins);
+		$graphCounter = $num;
+
+		$position = [];
+		for ($graphI = 0; $graphI < $graphCounter; $graphI++) {
+			for ($graphJ = 0; $graphJ < $graphCounter; $graphJ++) {
+				if ($distanceMatrix[$graphI][$graphJ] === $minimum) {
+					$position = [$graphI, $graphJ];
+				}
+			}
+		}
+
+
+
+		//dd($minimum);
+		//dd($position);
+		//dd($localMins);
+		//dd($distanceMatrix);
+
+	}
+
+
 }

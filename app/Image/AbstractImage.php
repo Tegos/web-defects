@@ -20,8 +20,12 @@ abstract class AbstractImage extends ImageHelper
 		$this->image = $image;
 
 		// set image default background
-		$white = imagecolorallocate($this->image, 255, 255, 255);
-		imagefill($this->image, 0, 0, $white);
+		//$white = imagecolorallocate($this->image, 255, 255, 255);
+		//imagefill($this->image, 0, 0, $white);
+
+		$background = imagecolorallocatealpha($image, 255, 255, 255, 127);
+		imagefill($image, 0, 0, $background);
+
 	}
 
 	public function __destruct()

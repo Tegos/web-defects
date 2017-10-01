@@ -23,7 +23,8 @@ class ImageController extends Controller
 		$img = Image::make($file_path);
 		$relative_path = '/uploads/' . $id . '.png';
 
-		$img->greyscale();
+		//$img->greyscale();
+
 		$new_file_path = public_path() . $relative_path;
 		$img->save($new_file_path);
 
@@ -65,7 +66,6 @@ class ImageController extends Controller
 		// distance matrix
 		$n = $image_data->divide_n; // cols
 		$m = $image_data->divide_m; // rows
-		$num = $n * $m;
 
 		$dataForDistance = [[]];
 		for ($i = 0; $i < $n; $i++) {
@@ -104,7 +104,7 @@ class ImageController extends Controller
 		}
 
 		//dd($dataForDistanceCount);
-
+		Matrix::getGroups($dataForDistanceCount);
 
 		$data = [];
 		$data['image'] = $image_data;
@@ -115,17 +115,6 @@ class ImageController extends Controller
 		$data['n'] = $image_data->divide_n; // cols
 		$data['m'] = $image_data->divide_m; // rows
 		$data['matrix_distance'] = $dataForDistanceCount;
-
-
-		$p = substr(str_replace('\\', '/',
-			realpath(dirname(__FILE__))),
-			strlen(str_replace('\\', '/', realpath($_SERVER['DOCUMENT_ROOT']))));
-		//$url = \Storage::disk('public')->url($new_file_path);
-		//$path = public_path($url);
-
-		//var_dump($new_file_path);
-		//var_dump($p);
-		//var_dump($path);
 
 
 		return view('image', $data);
