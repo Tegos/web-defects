@@ -29,13 +29,13 @@ class ImageCharacteristic extends AbstractImage
 
 	}
 
-	//todo: need implement
+
 	public function getIntensityByRow()
 	{
 		$image = $this->image;
 		$width = imagesx($image);
 		$height = imagesy($image);
-		$concentration_rows = [];
+		$intensity_rows = [];
 
 		for ($row = 0; $row < $height; $row++) {
 			$concentration_sum_row = 0;
@@ -46,10 +46,10 @@ class ImageCharacteristic extends AbstractImage
 				$concentration_sum_row += $concentration;
 			}
 			$intensity = round($concentration_sum_row / $width);
-			$concentration_rows[$row] = $intensity;
+			$intensity_rows[$row] = $intensity;
 		}
 
-		return $concentration_rows;
+		return $intensity_rows;
 
 	}
 

@@ -44,6 +44,7 @@ class ImageController extends Controller
 		// divided images
 		$n = $image_data->divide_n; // cols
 		$m = $image_data->divide_m; // rows
+		$threshold = (int)$image_data->threshold;
 
 		$cropped_images = [];
 
@@ -125,14 +126,17 @@ class ImageController extends Controller
 		if (Input::hasFile('image')) {
 			$file = Input::file('image');
 			$file->move('uploads', $file->getClientOriginalName());
-			$divide_n = (int)Input::get('divide_n', 10);
-			$divide_m = (int)Input::get('divide_m', 10);
+			$divide_n = (int)Input::get('divide_n', 3);
+			$divide_m = (int)Input::get('divide_m', 3);
+			$threshold = (int)Input::get('threshold', 255);
+
 
 			$image_model = new ImageModel;
 
 			$image_model->image = '/uploads/' . $file->getClientOriginalName();
 			$image_model->divide_n = $divide_n;
 			$image_model->divide_m = $divide_m;
+			$image_model->threshold = $threshold;
 
 			$image_model->save();
 			return Redirect::to('image/' . $image_model->id);

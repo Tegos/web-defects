@@ -10,6 +10,7 @@ namespace App\Http\Controllers\Ajax;
 
 use App\Http\Controllers\Controller;
 
+use \App\Image as ImageModel;
 use \App\Image\ImageCharacteristic;
 
 
@@ -17,8 +18,10 @@ class ImageIntensity extends Controller
 {
 	public function get($id, $m, $n)
 	{
+		$image_data = ImageModel::find($id);
 		$m = (int)$m;
 		$n = (int)$n;
+		$threshold = (int)$image_data->threshold;
 
 		$imageCharacteristic = new ImageCharacteristic();
 		$file_path_crop = "/uploads/{$id}_{$m}_{$n}_grid_crop.png";

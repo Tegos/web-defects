@@ -47,14 +47,33 @@
 					</div>
 					<div class="row uniform">
 						<div class="6u 12u$(xsmall)">
+							<label for="divide_n">N</label>
+						</div>
+						<div class="6u$ 12u$(xsmall)">
 							<input type="number" name="divide_n"
 							       id="divide_n" value="3" placeholder="N"/>
+						</div>
+					</div>
+
+					<div class="row uniform">
+						<div class="6u 12u$(xsmall)">
+							<label for="divide_m">M</label>
 						</div>
 						<div class="6u$ 12u$(xsmall)">
 							<input type="number" name="divide_m"
 							       id="divide_m" value="3" placeholder="M"/>
 						</div>
 					</div>
+
+					<div class="row uniform">
+						<div class="6u 12u$(xsmall)">
+							<label for="input_threshold">Поріг</label>
+						</div>
+						<div class="6u$ 12u$(xsmall)">
+							<input min="10" max="255" type="number" value="255" id="input_threshold" name="threshold" />
+						</div>
+					</div>
+
 					<div class="row uniform">
 						<!--div class="12u$">
 							<div class="select-wrapper">
