@@ -30,7 +30,7 @@ class ImageCharacteristic extends AbstractImage
 	}
 
 
-	public function getIntensityByRow()
+	public function getIntensityByRow($threshold = 255)
 	{
 		$image = $this->image;
 		$width = imagesx($image);
@@ -43,9 +43,14 @@ class ImageCharacteristic extends AbstractImage
 				$color_index = imagecolorat($image, $column, $row);
 				$color = imagecolorsforindex($image, $color_index); //колір пікселя
 				$concentration = round(($color['red'] + $color['green'] + $color['blue']) / 3); //концентрація
+				if ($concentration > $threshold) {
+					$concentration = self::MAX_INTENSITY;
+				}
+
 				$concentration_sum_row += $concentration;
 			}
 			$intensity = round($concentration_sum_row / $width);
+			
 			$intensity_rows[$row] = $intensity;
 		}
 

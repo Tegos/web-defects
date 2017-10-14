@@ -105,7 +105,7 @@ class ImageController extends Controller
 		}
 
 		//dd($dataForDistanceCount);
-		Matrix::getGroups($dataForDistanceCount);
+		//Matrix::getGroups($dataForDistanceCount);
 
 		$data = [];
 		$data['image'] = $image_data;

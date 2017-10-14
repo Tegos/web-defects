@@ -67,10 +67,10 @@
 
 					<div class="row uniform">
 						<div class="6u 12u$(xsmall)">
-							<label for="input_threshold">Поріг</label>
+							<label for="input_threshold">Поріг сегментування</label>
 						</div>
 						<div class="6u$ 12u$(xsmall)">
-							<input min="10" max="255" type="number" value="255" id="input_threshold" name="threshold" />
+							<input min="10" max="255" type="number" value="255" id="input_threshold" name="threshold"/>
 						</div>
 					</div>
 

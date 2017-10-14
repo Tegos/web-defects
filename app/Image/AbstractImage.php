@@ -7,6 +7,7 @@ abstract class AbstractImage extends ImageHelper
 	protected $realWidth;
 	protected $realHeight;
 	protected $image;
+	const MAX_INTENSITY = 255;
 
 	public function __construct($image_path)
 	{
@@ -23,7 +24,7 @@ abstract class AbstractImage extends ImageHelper
 		//$white = imagecolorallocate($this->image, 255, 255, 255);
 		//imagefill($this->image, 0, 0, $white);
 
-		$background = imagecolorallocatealpha($image, 255, 255, 255, 127);
+		$background = imagecolorallocatealpha($image, 255, 255, 255, 0);
 		imagefill($image, 0, 0, $background);
 
 	}
