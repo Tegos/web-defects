@@ -100,6 +100,36 @@
 
 					</div>
 				</div>
+
+				<div class="row uniform">
+					<div class="12u$">
+						<h2>Виділені підгрупи</h2>
+						<div class="table-wrapper">
+							<table class="table table-bordered matrix_table" id="table_matrix_distance">
+								<thead>
+								<tr>
+									@foreach ($groups as $indexKey => $group)
+										<th class="text-center">Група {{$loop->iteration}}</th>
+									@endforeach
+								</tr>
+								</thead>
+								<tbody>
+								@foreach ($groups as $indexKey => $group)
+									<tr>
+										@foreach($group as $g)
+											<td>
+												<div class="content">{{ $dataGraphIdentification[$g][0] .'x'. $dataGraphIdentification[$g][1] }}</div>
+											</td>
+										@endforeach
+									</tr>
+								@endforeach
+								</tbody>
+							</table>
+						</div>
+
+					</div>
+				</div>
+
 			</section>
 
 			<div class="row uniform">

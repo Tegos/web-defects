@@ -35,8 +35,8 @@ class Matrix
 
 		$num = count($distanceMatrix);
 
-		while (count($group) < self::NUM_IN_GROUP * 2) {
-			var_dump(count($group));
+		$countIteration = 1;
+		while (count($group) < self::NUM_IN_GROUP - 1) {
 			$localMins = [];
 			for ($i = 0; $i < $num; $i++) {
 				if (!in_array($i, $group)) {
@@ -57,19 +57,31 @@ class Matrix
 				}
 			}
 
+			$countIteration++;
+
 			$group = array_unique($group);
-			if (count($group) > self::NUM_IN_GROUP) {
-				//$group = array_slice($group, 0, self::NUM_IN_GROUP);
+			if (count($group) > self::NUM_IN_GROUP * (self::NUM_IN_GROUP - 1)) {
+				//$group = array_slice($group, 0, self::NUM_IN_GROUP * $countIteration);
+				$group = array_slice($group, 0, self::NUM_IN_GROUP * (self::NUM_IN_GROUP - 1));
+			}
+			$group = array_values($group);
+		}
+
+		$lastGroup = [];
+		for ($i = 0; $i < $num; $i++) {
+			if (!in_array($i, $group)) {
+				$lastGroup[] = $i;
 			}
 		}
 
+		$group = array_merge($group, $lastGroup);
 
-		//dd($minimum);
-		dd($group);
+		$chunk = array_chunk($group, self::NUM_IN_GROUP);
+		//dd($group);
 		//dd($position);
 		//dd($localMins);
 		//dd($distanceMatrix);
-		return $group;
+		return $chunk;
 
 	}
 

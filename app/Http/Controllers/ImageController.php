@@ -74,8 +74,6 @@ class ImageController extends Controller
 				$imageCharacteristic = new ImageCharacteristic();
 				$file_path_crop = "/uploads/{$id}_{$j}_{$i}_grid_crop.png";
 
-				//var_dump($file_path_crop);
-
 				$imageCharacteristic->setImageByPath(public_path() . $file_path_crop);
 				$intensityByRow = $imageCharacteristic->getIntensityByRow();
 				$dataForDistance[$i][$j] = $intensityByRow;
@@ -104,8 +102,9 @@ class ImageController extends Controller
 			}
 		}
 
-		//dd($dataForDistanceCount);
-		Matrix::getGroups($dataForDistanceCount);
+		// groups
+		$groups = Matrix::getGroups($dataForDistanceCount);
+		//dd($groups);
 
 		$data = [];
 		$data['image'] = $image_data;
@@ -116,6 +115,10 @@ class ImageController extends Controller
 		$data['n'] = $image_data->divide_n; // cols
 		$data['m'] = $image_data->divide_m; // rows
 		$data['matrix_distance'] = $dataForDistanceCount;
+
+		$data['dataGraphIdentification'] = $dataGraphIdentification;
+
+		$data['groups'] = $groups;
 
 
 		return view('image', $data);
