@@ -102,9 +102,6 @@ class ImageGrid extends AbstractImage
 		$width = $cellWidth;
 		$height = $cellHeight;
 
-		//var_dump($width);
-		//var_dump($this->realWidth);
-
 
 		$crop = imagecrop($this->image,
 			[

@@ -23,7 +23,7 @@ class ImageController extends Controller
 		$img = Image::make($file_path);
 		$relative_path = '/uploads/' . $id . '.png';
 
-		//$img->greyscale();
+		$img->greyscale();
 
 		$new_file_path = public_path() . $relative_path;
 		$img->save($new_file_path);
@@ -38,6 +38,7 @@ class ImageController extends Controller
 
 
 		$imageGrid->addGridToImage();
+
 		$file_path_with_grid = '/uploads/' . $id . '_grid.png';
 		$imageGrid->saveImageToFile(public_path() . $file_path_with_grid);
 
@@ -55,7 +56,7 @@ class ImageController extends Controller
 				$originalImage->saveImageToFile(public_path() . $file_path_crop, $crop);
 
 
-				$cropped_images[] = [
+				$cropped_images["{$j}x{$i}"] = [
 					'image' => $file_path_crop,
 					'm' => $j,
 					'n' => $i,

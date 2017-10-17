@@ -35,3 +35,7 @@
 .matrix_table .main_diagonal {
 	background-color: #312450 !important;
 }
+
+pre {
+	margin-bottom: 0;
+}

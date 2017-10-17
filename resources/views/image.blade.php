@@ -117,8 +117,14 @@
 								@foreach ($groups as $indexKey => $group)
 									<tr>
 										@foreach($group as $g)
-											<td>
-												<div class="content">{{ $dataGraphIdentification[$g][0] .'x'. $dataGraphIdentification[$g][1] }}</div>
+											@php ( $image_key = $dataGraphIdentification[$g][0] .'x'. $dataGraphIdentification[$g][1])
+											<td class="text-center">
+												<img height="200" alt="{{ $cropped_images[$image_key]['image'] }}"
+												     src="{{ $cropped_images[$image_key]['image'] }}"/>
+
+												<div class="content">
+													<pre>{{ $image_key }}</pre>
+												</div>
 											</td>
 										@endforeach
 									</tr>
