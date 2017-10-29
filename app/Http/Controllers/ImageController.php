@@ -18,6 +18,10 @@ class ImageController extends Controller
 		$id = (int)$id;
 		$image_data = ImageModel::find($id);
 
+
+
+		$algorithms = ImageGrid::getAlgorithms();
+
 		$file_path = public_path() . $image_data->image;
 
 		$img = Image::make($file_path);
@@ -46,6 +50,10 @@ class ImageController extends Controller
 		$n = $image_data->divide_n; // cols
 		$m = $image_data->divide_m; // rows
 		$threshold = (int)$image_data->threshold;
+		$algorithm = (int)$image_data->algorithm;
+		$algorithmData = $algorithms[$algorithm];
+
+		dd($image_data);
 
 		$cropped_images = [];
 
@@ -76,8 +84,15 @@ class ImageController extends Controller
 				$file_path_crop = "/uploads/{$id}_{$j}_{$i}_grid_crop.png";
 
 				$imageCharacteristic->setImageByPath(public_path() . $file_path_crop);
-				$intensityByRow = $imageCharacteristic->getIntensityByRow();
-				$dataForDistance[$i][$j] = $intensityByRow;
+
+				// based data on selected feature
+				if (is_callable([$imageCharacteristic, $algorithmData['feature_method']])) {
+					$featureData = $imageCharacteristic->$algorithmData['feature_method']();
+				} else {
+					$featureData = $imageCharacteristic->getIntensityByRow();
+				}
+
+				$dataForDistance[$i][$j] = $featureData;
 			}
 		}
 
@@ -109,6 +124,7 @@ class ImageController extends Controller
 
 		$data = [];
 		$data['image'] = $image_data;
+		$data['algorithmData'] = $algorithmData;
 		$data['image_edit'] = $relative_path;
 		$data['image_grid'] = $file_path_with_grid;
 		$data['cropped_images'] = $cropped_images;

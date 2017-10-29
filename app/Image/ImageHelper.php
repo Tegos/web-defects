@@ -56,8 +56,22 @@ class ImageHelper
 	public static function getAlgorithms()
 	{
 		return [
-			1 => 'Інтенсивність по рядках',
-			2 => 'Інтенсивність по стовпцях'
+			1 =>
+				[
+					'name' => 'Інтенсивність по рядках',
+					'feature_method' => 'getIntensityByRow',
+					'feature' => 'Інтенсивність',
+					'y_feature_text' => 'Середня інтенсивність',
+					'text' => 'по рядках',
+				],
+			2 =>
+				[
+					'name' => 'Інтенсивність по стовпцях',
+					'feature_method' => 'getIntensityByColumn',
+					'feature' => 'Інтенсивність',
+					'y_feature_text' => 'Середня інтенсивність',
+					'text' => 'по стовпцях',
+				]
 		];
 	}
 }

@@ -18,10 +18,14 @@ class ImageIntensity extends Controller
 {
 	public function get($id, $m, $n)
 	{
+		$algorithms = ImageCharacteristic::getAlgorithms();
+
 		$image_data = ImageModel::find($id);
 		$m = (int)$m;
 		$n = (int)$n;
 		$threshold = (int)$image_data->threshold;
+		$algorithm = (int)$image_data->algorithm;
+		$algorithmData = $algorithms[$algorithm];
 
 		$imageCharacteristic = new ImageCharacteristic();
 		$file_path_crop = "/uploads/{$id}_{$m}_{$n}_grid_crop.png";
@@ -29,10 +33,17 @@ class ImageIntensity extends Controller
 		//var_dump($file_path_crop);
 
 		$imageCharacteristic->setImageByPath(public_path() . $file_path_crop);
-		$intensityByRow = $imageCharacteristic->getIntensityByRow($threshold);
+		//$intensityByRow = $imageCharacteristic->getIntensityByRow($threshold);
+
+		// based data on selected feature
+		if (is_callable([$imageCharacteristic, $algorithmData['feature_method']])) {
+			$featureData = $imageCharacteristic->$algorithmData['feature_method']($threshold);
+		} else {
+			$featureData = $imageCharacteristic->getIntensityByRow($threshold);
+		}
 
 
 		//dd($intensityByRow);
-		return response()->json($intensityByRow);
+		return response()->json($featureData);
 	}
 }

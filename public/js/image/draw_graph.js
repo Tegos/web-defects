@@ -22,38 +22,26 @@ let initChart = function (element_id = '', series_data = []) {
 	Highcharts.chart(element_id, {
 
 		title: {
-			text: 'Інтенсивність'
+			text: chartTitle
 		},
 
 		subtitle: {
-			text: 'по рядках'
+			text: chartSubTitle
 		},
 
 		yAxis: {
 			max: 255,
 			min: 0,
 			title: {
-				text: 'Середня інтенсивність'
+				text: yFeatureText
 			},
 			alignTicks: false,
 			endOnTick: false,
 		},
-		// legend: {
-		// 	layout: 'vertical',
-		// 	align: 'right',
-		// 	verticalAlign: 'middle'
-		// },
-
-
-		// plotOptions: {
-		// 	series: {
-		// 		pointStart: 2010
-		// 	}
-		// },
 
 		series: [
 			{
-				name: 'Інтенсивність',
+				name: chartTitle,
 				data: series_data
 			}
 		],

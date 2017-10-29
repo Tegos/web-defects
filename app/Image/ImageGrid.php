@@ -9,8 +9,9 @@ class ImageGrid extends AbstractImage
 
 	public function __construct($image_path, $gridWidth, $gridHeight)
 	{
-		$this->gridWidth = $gridWidth;
-		$this->gridHeight = $gridHeight;
+		$this->gridWidth = $gridWidth > 0 ? $gridWidth : 1;
+		$this->gridHeight = $gridHeight > 0 ? $gridHeight : 1;
+
 
 		parent::__construct($image_path);
 

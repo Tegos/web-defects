@@ -50,7 +50,7 @@
 							<label for="divide_n">N</label>
 						</div>
 						<div class="6u$ 12u$(xsmall)">
-							<input type="number" name="divide_n"
+							<input type="number" name="divide_n" min="1" max="20"
 							       id="divide_n" value="3" placeholder="N"/>
 						</div>
 					</div>
@@ -60,7 +60,7 @@
 							<label for="divide_m">M</label>
 						</div>
 						<div class="6u$ 12u$(xsmall)">
-							<input type="number" name="divide_m"
+							<input type="number" name="divide_m" min="1" max="20"
 							       id="divide_m" value="3" placeholder="M"/>
 						</div>
 					</div>
@@ -76,13 +76,13 @@
 
 					<div class="row uniform">
 						<div class="6u 12u$(xsmall)">
-							<label for="input_algorithm">Алгоритм обробки</label>
+							<label for="input_algorithm">Ознака</label>
 						</div>
 						<div class="6u 12u$(xsmall)">
 							<div class="select-wrapper">
 								<select name="algorithm" id="input_algorithm">
-									@foreach ($algorithms as $id => $text)
-										<option value="{{$id}}">{{$text}}</option>
+									@foreach ($algorithms as $id => $algorithm)
+										<option value="{{$id}}">{{$algorithm['name']}}</option>
 									@endforeach
 								</select>
 							</div>
@@ -93,7 +93,9 @@
 			</section>
 
 			<ul class="actions">
-				<li><a id="loadImage" href="#one" class="button scrolly">Далі</a></li>
+				<li>
+					<button id="loadImage" href="" class="button">Далі</button>
+				</li>
 			</ul>
 		</div>
 	</section>

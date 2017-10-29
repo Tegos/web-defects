@@ -140,11 +140,13 @@
 
 			<div class="row uniform">
 				<div class="12u$">
-					<div class="inner">
-						<ul class="actions">
-							<li><a id="loadImage" href="#one" class="button scrolly">Далі</a></li>
-						</ul>
-					</div>
+					{{--<div class="inner">--}}
+					{{--<ul class="actions">--}}
+					{{--<li>--}}
+					{{--<button class="button scrolly">Далі</button>--}}
+					{{--</li>--}}
+					{{--</ul>--}}
+					{{--</div>--}}
 				</div>
 			</div>
 
@@ -156,6 +158,9 @@
 @section('scripts')
 	<script>
 		let imageId = '{{$image->id}}';
+		let chartTitle = '{{$algorithmData['feature']}}';
+		let chartSubTitle = '{{$algorithmData['text']}}';
+		let yFeatureText = '{{$algorithmData['y_feature_text']}}';
 	</script>
 	<script src="https://code.highcharts.com/highcharts.js"></script>
 	<script src="/js/image/draw_graph.js"></script>
