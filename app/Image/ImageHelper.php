@@ -52,4 +52,12 @@ class ImageHelper
 		}
 		return array($H, $S, $L);
 	}
+
+	public static function getAlgorithms()
+	{
+		return [
+			1 => 'Інтенсивність по рядках',
+			2 => 'Інтенсивність по стовпцях'
+		];
+	}
 }

@@ -133,6 +133,7 @@ class ImageController extends Controller
 			$divide_n = (int)Input::get('divide_n', 3);
 			$divide_m = (int)Input::get('divide_m', 3);
 			$threshold = (int)Input::get('threshold', 255);
+			$algorithm = (int)Input::get('algorithm', 1);
 
 
 			$image_model = new ImageModel;
@@ -141,6 +142,7 @@ class ImageController extends Controller
 			$image_model->divide_n = $divide_n;
 			$image_model->divide_m = $divide_m;
 			$image_model->threshold = $threshold;
+			$image_model->algorithm = $algorithm;
 
 			$image_model->save();
 			return Redirect::to('image/' . $image_model->id);

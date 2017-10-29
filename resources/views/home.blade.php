@@ -75,17 +75,18 @@
 					</div>
 
 					<div class="row uniform">
-						<!--div class="12u$">
+						<div class="6u 12u$(xsmall)">
+							<label for="input_algorithm">Алгоритм обробки</label>
+						</div>
+						<div class="6u 12u$(xsmall)">
 							<div class="select-wrapper">
-								<select name="demo-category" id="demo-category">
-									<option value="">- Category -</option>
-									<option value="1">Manufacturing</option>
-									<option value="1">Shipping</option>
-									<option value="1">Administration</option>
-									<option value="1">Human Resources</option>
+								<select name="algorithm" id="input_algorithm">
+									@foreach ($algorithms as $id => $text)
+										<option value="{{$id}}">{{$text}}</option>
+									@endforeach
 								</select>
 							</div>
-						</div-->
+						</div>
 					</div>
 					<input type="hidden" value="{{ csrf_token() }}" name="_token"/>
 				</form>
