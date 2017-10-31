@@ -19,7 +19,6 @@ class ImageController extends Controller
 		$image_data = ImageModel::find($id);
 
 
-
 		$algorithms = ImageGrid::getAlgorithms();
 
 		$file_path = public_path() . $image_data->image;
@@ -53,7 +52,7 @@ class ImageController extends Controller
 		$algorithm = (int)$image_data->algorithm;
 		$algorithmData = $algorithms[$algorithm];
 
-		dd($image_data);
+		//dd($image_data);
 
 		$cropped_images = [];
 
@@ -122,6 +121,9 @@ class ImageController extends Controller
 		$groups = Matrix::getGroups($dataForDistanceCount);
 		//dd($groups);
 
+		// total distances by groups
+		$totalDistances = Matrix::getTotalDistancesByGroups($dataGraphIdentification, $dataForDistanceCount, $groups);
+
 		$data = [];
 		$data['image'] = $image_data;
 		$data['algorithmData'] = $algorithmData;
@@ -136,6 +138,7 @@ class ImageController extends Controller
 		$data['dataGraphIdentification'] = $dataGraphIdentification;
 
 		$data['groups'] = $groups;
+		$data['totalDistances'] = $totalDistances;
 
 
 		return view('image', $data);

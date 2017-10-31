@@ -85,5 +85,22 @@ class Matrix
 
 	}
 
+	public static function getTotalDistancesByGroups(array $dataGraphIdentification, array $distanceMatrix, array $groups)
+	{
+		$distances = [];
+		foreach ($groups as $indexKey => $groupItem) {
+			$distances[$indexKey] = 0;
+			foreach ($groupItem as $group) {
+				$i = $dataGraphIdentification[$group][0];
+				$j = $dataGraphIdentification[$group][1];
+				$distances[$indexKey] += $distanceMatrix[$i][$j];
+				//var_dump('i', $i, 'j', $j);
+				//var_dump($distanceMatrix[$i][$j]);
+			}
+		}
+		//dd($distances);
+		return $distances;
+	}
+
 
 }

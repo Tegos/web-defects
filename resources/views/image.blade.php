@@ -129,6 +129,19 @@
 										@endforeach
 									</tr>
 								@endforeach
+
+								<tr>
+									<td colspan="{{count($totalDistances)}}" class="text-center">Загальна відстань у
+										групі
+									</td>
+								</tr>
+
+								<tr>
+									@foreach ($totalDistances as $indexKey => $groupDistance)
+										<td class="text-center">{{$groupDistance}}</td>
+									@endforeach
+								</tr>
+
 								</tbody>
 							</table>
 						</div>
