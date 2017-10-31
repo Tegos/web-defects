@@ -88,6 +88,16 @@
 							</div>
 						</div>
 					</div>
+
+					<div class="row uniform">
+						<div class="6u 12u$(xsmall)">
+							<label for="input_groups">Кількість груп</label>
+						</div>
+						<div class="6u$ 12u$(xsmall)">
+							<input min="1" max="10" type="number" value="3" id="input_groups" name="groups"/>
+						</div>
+					</div>
+
 					<input type="hidden" value="{{ csrf_token() }}" name="_token"/>
 				</form>
 			</section>

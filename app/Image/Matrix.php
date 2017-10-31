@@ -10,7 +10,7 @@ namespace App\Image;
 
 class Matrix
 {
-	const NUM_IN_GROUP = 3;
+	//const NUM_IN_GROUP = 3;
 
 	public static function findDistance($i, $j, array $dataGraphIdentification, array $data)
 	{
@@ -29,14 +29,14 @@ class Matrix
 		return round($sum / $num, 2);
 	}
 
-	public static function getGroups($distanceMatrix)
+	public static function getGroups($distanceMatrix, $numInGroup = 5)
 	{
 		$group = [];
 
 		$num = count($distanceMatrix);
 
 		$countIteration = 1;
-		while (count($group) < self::NUM_IN_GROUP - 1) {
+		while (count($group) < $numInGroup - 1) {
 			$localMins = [];
 			for ($i = 0; $i < $num; $i++) {
 				if (!in_array($i, $group)) {
@@ -60,10 +60,17 @@ class Matrix
 			$countIteration++;
 
 			$group = array_unique($group);
-			if (count($group) > self::NUM_IN_GROUP * (self::NUM_IN_GROUP - 1)) {
-				//$group = array_slice($group, 0, self::NUM_IN_GROUP * $countIteration);
-				$group = array_slice($group, 0, self::NUM_IN_GROUP * (self::NUM_IN_GROUP - 1));
+
+			$countGroup = count($group);
+			if (($countGroup % 2)) {
+				if (count($group) > $numInGroup * ($numInGroup - 1)) {
+					//$group = array_slice($group, 0, self::NUM_IN_GROUP * $countIteration);
+					$group = array_slice($group, 0, $numInGroup * ($numInGroup - 1));
+				}
 			}
+
+
+
 			$group = array_values($group);
 		}
 
@@ -76,7 +83,7 @@ class Matrix
 
 		$group = array_merge($group, $lastGroup);
 
-		$chunk = array_chunk($group, self::NUM_IN_GROUP);
+		$chunk = array_chunk($group, $numInGroup);
 		//dd($group);
 		//dd($position);
 		//dd($localMins);

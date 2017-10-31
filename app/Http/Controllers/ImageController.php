@@ -50,6 +50,9 @@ class ImageController extends Controller
 		$m = $image_data->divide_m; // rows
 		$threshold = (int)$image_data->threshold;
 		$algorithm = (int)$image_data->algorithm;
+		$groups = (int)$image_data->groups;
+
+
 		$algorithmData = $algorithms[$algorithm];
 
 		//dd($image_data);
@@ -153,6 +156,7 @@ class ImageController extends Controller
 			$divide_m = (int)Input::get('divide_m', 3);
 			$threshold = (int)Input::get('threshold', 255);
 			$algorithm = (int)Input::get('algorithm', 1);
+			$groups = (int)Input::get('groups', 3);
 
 
 			$image_model = new ImageModel;
@@ -162,6 +166,7 @@ class ImageController extends Controller
 			$image_model->divide_m = $divide_m;
 			$image_model->threshold = $threshold;
 			$image_model->algorithm = $algorithm;
+			$image_model->groups = $groups;
 
 			$image_model->save();
 			return Redirect::to('image/' . $image_model->id);
