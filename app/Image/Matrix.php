@@ -10,8 +10,6 @@ namespace App\Image;
 
 class Matrix
 {
-	//const NUM_IN_GROUP = 3;
-
 	public static function findDistance($i, $j, array $dataGraphIdentification, array $data)
 	{
 		$sum = 0;
@@ -29,14 +27,21 @@ class Matrix
 		return round($sum / $num, 2);
 	}
 
-	public static function getGroups($distanceMatrix, $numInGroup = 5)
+	/**
+	 * @param $distanceMatrix
+	 * @param int $numOfGroup кількість груп
+	 * @return array
+	 */
+	public static function getGroups($distanceMatrix, $numOfGroup = 4)
 	{
 		$group = [];
 
 		$num = count($distanceMatrix);
+		$elementInGroup = (int)($num / $numOfGroup);
+		//dd($elementInGroup);
 
 		$countIteration = 1;
-		while (count($group) < $numInGroup - 1) {
+		while (count($group) < $numOfGroup) {
 			$localMins = [];
 			for ($i = 0; $i < $num; $i++) {
 				if (!in_array($i, $group)) {
@@ -62,17 +67,18 @@ class Matrix
 			$group = array_unique($group);
 
 			$countGroup = count($group);
-			if (($countGroup % 2)) {
-				if (count($group) > $numInGroup * ($numInGroup - 1)) {
-					//$group = array_slice($group, 0, self::NUM_IN_GROUP * $countIteration);
-					$group = array_slice($group, 0, $numInGroup * ($numInGroup - 1));
-				}
-			}
-
+//			if (($countGroup % 2)) {
+//				if (count($group) > $numInGroup * ($numInGroup - 1)) {
+//					//$group = array_slice($group, 0, self::NUM_IN_GROUP * $countIteration);
+//					$group = array_slice($group, 0, $numInGroup * ($numInGroup - 1));
+//				}
+//			}
 
 
 			$group = array_values($group);
 		}
+
+		//dd($group);
 
 		$lastGroup = [];
 		for ($i = 0; $i < $num; $i++) {
@@ -83,7 +89,24 @@ class Matrix
 
 		$group = array_merge($group, $lastGroup);
 
-		$chunk = array_chunk($group, $numInGroup);
+		$chunk = [];
+
+		$usedElement = [];
+		for ($i = 0; $i < $numOfGroup + $elementInGroup; $i += $elementInGroup) {
+			$offset = $i;
+			$length = $elementInGroup;
+
+			$part = array_slice($group, $offset, $length);
+			$chunk[] = $part;
+			$usedElement = array_merge($usedElement, $part);
+		}
+
+		$diff = array_diff($group, $usedElement);
+		$chunk[] = $diff;
+
+		//dd($diff);
+		//dd($usedElement);
+		//dd($chunk);
 		//dd($group);
 		//dd($position);
 		//dd($localMins);
@@ -107,6 +130,21 @@ class Matrix
 		}
 		//dd($distances);
 		return $distances;
+	}
+
+	public static function getMaxElementInGroup($groups)
+	{
+		$groupElements = [];
+		foreach ($groups as $groupData) {
+			$groupElements[] = count($groupData);
+		}
+		$max = max($groupElements);
+		return $max;
+	}
+
+	public static function transpose($array)
+	{
+		return array_map(null, ...$array);
 	}
 
 

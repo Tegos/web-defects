@@ -108,27 +108,38 @@
 							<table class="table table-bordered matrix_table" id="table_matrix_distance">
 								<thead>
 								<tr>
-									@foreach ($groups as $indexKey => $group)
-										<th class="text-center">Група {{$loop->iteration}}</th>
-									@endforeach
+									@for ($n = 0; $n < $numOfGroup; $n++)
+										<th class="text-center">Група {{$n+1}}</th>
+									@endfor
 								</tr>
 								</thead>
 								<tbody>
-								@foreach ($groups as $indexKey => $group)
-									<tr>
-										@foreach($group as $g)
-											@php ( $image_key = $dataGraphIdentification[$g][0] .'x'. $dataGraphIdentification[$g][1])
-											<td class="text-center">
-												<img height="200" alt="{{ $cropped_images[$image_key]['image'] }}"
-												     src="{{ $cropped_images[$image_key]['image'] }}"/>
 
-												<div class="content">
-													<pre>{{ $image_key }}</pre>
-												</div>
-											</td>
+
+								@foreach($groups as $groupData)
+									<tr class="tr_num">
+										@foreach($groupData as $group)
+											{{--@php ($groupData = $groups[$g] )--}}
+
+											{{--@php ($group = $groupData[$n] )--}}
+											@if(isset($group))
+												@php ( $image_key = $dataGraphIdentification[$group][0] .'x'. $dataGraphIdentification[$group][1])
+												<td class="text-center">
+													<img height="200" alt="{{ $cropped_images[$image_key]['image'] }}"
+													     src="{{ $cropped_images[$image_key]['image'] }}"/>
+
+													<div class="content">
+														<pre>{{ $image_key }}</pre>
+													</div>
+												</td>
+											@else
+												<td></td>
+											@endif
+
 										@endforeach
 									</tr>
 								@endforeach
+
 
 								<tr>
 									<td colspan="{{count($totalDistances)}}" class="text-center">Загальна відстань у

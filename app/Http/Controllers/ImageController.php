@@ -50,7 +50,7 @@ class ImageController extends Controller
 		$m = $image_data->divide_m; // rows
 		$threshold = (int)$image_data->threshold;
 		$algorithm = (int)$image_data->algorithm;
-		$groups = (int)$image_data->groups;
+		$numOfGroup = (int)$image_data->groups;
 
 
 		$algorithmData = $algorithms[$algorithm];
@@ -121,8 +121,13 @@ class ImageController extends Controller
 		}
 
 		// groups
-		$groups = Matrix::getGroups($dataForDistanceCount);
+		$groups = Matrix::getGroups($dataForDistanceCount, $numOfGroup);
 		//dd($groups);
+
+		$transpose = Matrix::transpose($groups);
+		//dd($transpose);
+
+		$maxElementInGroup = Matrix::getMaxElementInGroup($groups);
 
 		// total distances by groups
 		$totalDistances = Matrix::getTotalDistancesByGroups($dataGraphIdentification, $dataForDistanceCount, $groups);
@@ -141,6 +146,13 @@ class ImageController extends Controller
 		$data['dataGraphIdentification'] = $dataGraphIdentification;
 
 		$data['groups'] = $groups;
+		$data['groups'] = $transpose;
+
+		$data['numOfGroup'] = $numOfGroup;
+		$data['maxElementInGroup'] = $maxElementInGroup;
+
+		//dd($maxElementInGroup);
+
 		$data['totalDistances'] = $totalDistances;
 
 
