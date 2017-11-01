@@ -32,7 +32,7 @@ class Matrix
 	 * @param int $numOfGroup кількість груп
 	 * @return array
 	 */
-	public static function getGroups($distanceMatrix, $numOfGroup = 4)
+	public static function getGroups($distanceMatrix, $numOfGroup = 3)
 	{
 		$group = [];
 
@@ -40,8 +40,9 @@ class Matrix
 		$elementInGroup = (int)($num / $numOfGroup);
 		//dd($elementInGroup);
 
+		//dd(($numOfGroup - 1) * $elementInGroup);
 		$countIteration = 1;
-		while (count($group) < $numOfGroup) {
+		while (count($group) < (($numOfGroup - 1) * $elementInGroup)) {
 			$localMins = [];
 			for ($i = 0; $i < $num; $i++) {
 				if (!in_array($i, $group)) {
@@ -62,20 +63,39 @@ class Matrix
 				}
 			}
 
-			$countIteration++;
 
 			$group = array_unique($group);
 
 			$countGroup = count($group);
-//			if (($countGroup % 2)) {
-//				if (count($group) > $numInGroup * ($numInGroup - 1)) {
-//					//$group = array_slice($group, 0, self::NUM_IN_GROUP * $countIteration);
-//					$group = array_slice($group, 0, $numInGroup * ($numInGroup - 1));
-//				}
-//			}
 
+			$mod = $countGroup / $elementInGroup;
+			$leftover = (int)($countGroup / $elementInGroup);
+			//$leftover = $leftover - $leftover;
+
+			if (($elementInGroup % 2)) {
+
+				//if ($countGroup > $elementInGroup * ($elementInGroup - 1)) {
+
+				if ($leftover) {
+					//var_dump($elementInGroup * $countIteration);
+					var_dump($leftover);
+					//var_dump($left);
+					//var_dump($countGroup);
+					array_pop($group);
+				}
+				//$group = array_slice($group, 0, $elementInGroup * $countIteration);
+				//$group = array_slice($group, 0, $elementInGroup * ($elementInGroup - 1));
+				//}
+			}
+
+			//var_dump($group);
 
 			$group = array_values($group);
+
+			$countIteration++;
+			if ($countIteration > 100) {
+				break;
+			}
 		}
 
 		//dd($group);
