@@ -35,7 +35,6 @@ $(document).ready(function () {
 			type: 'post',
 			dataType: 'json',
 			data: {
-				//_token: '{{ csrf_token() }}',
 				featureDataOfImages,
 				imageKeys
 			},
