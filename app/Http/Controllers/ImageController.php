@@ -80,6 +80,9 @@ class ImageController extends Controller
 		$m = $image_data->divide_m; // rows
 
 		$dataForDistance = [[]];
+
+		$featureDataOfImages = [];
+
 		for ($i = 0; $i < $n; $i++) {
 			for ($j = 0; $j < $m; $j++) {
 				$imageCharacteristic = new ImageCharacteristic();
@@ -95,6 +98,9 @@ class ImageController extends Controller
 				}
 
 				$dataForDistance[$i][$j] = $featureData;
+
+				$featureDataOfImages["{$j}x{$i}"] = $featureData;
+
 			}
 		}
 
@@ -154,6 +160,8 @@ class ImageController extends Controller
 		//dd($maxElementInGroup);
 
 		$data['totalDistances'] = $totalDistances;
+
+		$data['featureDataOfImages'] = json_encode($featureDataOfImages);
 
 
 		return view('image', $data);

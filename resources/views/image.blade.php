@@ -125,7 +125,7 @@
 													@if(isset($cropped_images[$image_key]))
 														<img height="200"
 														     alt="{{ $cropped_images[$image_key]['image'] }}"
-														     src="{{ $cropped_images[$image_key]['image'] }}"/>
+														     src="{{  $cropped_images[$image_key]['image'] }}"/>
 														<div class="content">
 															<pre>{{ $image_key }}</pre>
 														</div>
@@ -134,7 +134,6 @@
 											@else
 												<td></td>
 											@endif
-
 										@endforeach
 									</tr>
 								@endforeach
@@ -155,6 +154,35 @@
 								</tbody>
 							</table>
 						</div>
+
+					</div>
+				</div>
+
+				<div class="row uniform">
+					<div class="12u$">
+						<h2>Графіки груп</h2>
+						<div id="groupChart">
+							@for ($n = 0; $n < $numOfGroup; $n++)
+								<div class="row uniform">
+									<div class="12u$">
+										Група {{$n+1}}
+										@php ($image_keys = [])
+										@for ($l = 0; $l < $maxElementInGroup; $l++)
+											@if(isset($groups[$l][$n]))
+												@php($group = $groups[$l][$n])
+												@php ($image_key = $dataGraphIdentification[$group][1] .'x'. $dataGraphIdentification[$group][0])
+												@php($image_keys[] = $image_key)
+											@endif
+										@endfor
+
+
+										<div data-image="{{json_encode($image_keys)}}" class="groupChart"
+										     id="groupChart_{{$n}}"></div>
+									</div>
+								</div>
+							@endfor
+						</div>
+
 
 					</div>
 				</div>
@@ -184,6 +212,8 @@
 		let chartTitle = '{{$algorithmData['feature']}}';
 		let chartSubTitle = '{{$algorithmData['text']}}';
 		let yFeatureText = '{{$algorithmData['y_feature_text']}}';
+
+		let featureDataOfImages = '{!!$featureDataOfImages!!}';
 	</script>
 	<script src="https://code.highcharts.com/highcharts.js"></script>
 	<script src="/js/image/draw_graph.js"></script>

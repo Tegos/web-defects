@@ -24,3 +24,5 @@ Route::get('/image/{id}', 'ImageController@index');
 Route::get('/demoGrid', 'ImageController@demoGrid');
 
 Route::get('/ajax/intensity/{id}/{m}_{n}', 'Ajax\ImageIntensity@get');
+
+Route::post('/ajax/chart', 'Ajax\GroupChart@get');
