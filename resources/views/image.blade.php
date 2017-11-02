@@ -119,18 +119,17 @@
 								@foreach($groups as $groupData)
 									<tr class="tr_num">
 										@foreach($groupData as $group)
-											{{--@php ($groupData = $groups[$g] )--}}
-
-											{{--@php ($group = $groupData[$n] )--}}
 											@if(isset($group))
-												@php ( $image_key = $dataGraphIdentification[$group][0] .'x'. $dataGraphIdentification[$group][1])
+												@php ( $image_key = $dataGraphIdentification[$group][1] .'x'. $dataGraphIdentification[$group][0])
 												<td class="text-center">
-													<img height="200" alt="{{ $cropped_images[$image_key]['image'] }}"
-													     src="{{ $cropped_images[$image_key]['image'] }}"/>
-
-													<div class="content">
-														<pre>{{ $image_key }}</pre>
-													</div>
+													@if(isset($cropped_images[$image_key]))
+														<img height="200"
+														     alt="{{ $cropped_images[$image_key]['image'] }}"
+														     src="{{ $cropped_images[$image_key]['image'] }}"/>
+														<div class="content">
+															<pre>{{ $image_key }}</pre>
+														</div>
+													@endif
 												</td>
 											@else
 												<td></td>

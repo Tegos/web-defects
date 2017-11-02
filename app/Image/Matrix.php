@@ -38,9 +38,9 @@ class Matrix
 
 		$num = count($distanceMatrix);
 		$elementInGroup = (int)($num / $numOfGroup);
+		//dd($numOfGroup);
 		//dd($elementInGroup);
 
-		//dd(($numOfGroup - 1) * $elementInGroup);
 		$countIteration = 1;
 		while (count($group) < (($numOfGroup - 1) * $elementInGroup)) {
 			$localMins = [];
@@ -63,32 +63,15 @@ class Matrix
 				}
 			}
 
-
-			$group = array_unique($group);
-
 			$countGroup = count($group);
 
-			$mod = $countGroup / $elementInGroup;
-			$leftover = (int)($countGroup / $elementInGroup);
-			//$leftover = $leftover - $leftover;
-
 			if (($elementInGroup % 2)) {
-
-				//if ($countGroup > $elementInGroup * ($elementInGroup - 1)) {
-
-				if ($leftover) {
-					//var_dump($elementInGroup * $countIteration);
-					var_dump($leftover);
-					//var_dump($left);
-					//var_dump($countGroup);
+				if ($countGroup % 2) {
 					array_pop($group);
 				}
-				//$group = array_slice($group, 0, $elementInGroup * $countIteration);
-				//$group = array_slice($group, 0, $elementInGroup * ($elementInGroup - 1));
-				//}
 			}
 
-			//var_dump($group);
+			$group = array_unique($group);
 
 			$group = array_values($group);
 
@@ -108,23 +91,26 @@ class Matrix
 		}
 
 		$group = array_merge($group, $lastGroup);
-
 		$chunk = [];
 
 		$usedElement = [];
-		for ($i = 0; $i < $numOfGroup + $elementInGroup; $i += $elementInGroup) {
+		for ($i = 0; $i < $elementInGroup * ($numOfGroup - 1); $i += $elementInGroup) {
 			$offset = $i;
 			$length = $elementInGroup;
 
 			$part = array_slice($group, $offset, $length);
+
 			$chunk[] = $part;
 			$usedElement = array_merge($usedElement, $part);
 		}
 
+		// різна кількість елементів у групах
 		$diff = array_diff($group, $usedElement);
-		$chunk[] = $diff;
+		if (count($diff)) {
+			$chunk[] = $diff;
+		}
 
-		//dd($diff);
+		//dd(count($chunk), count($group));
 		//dd($usedElement);
 		//dd($chunk);
 		//dd($group);
