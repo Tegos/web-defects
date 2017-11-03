@@ -39,7 +39,7 @@ $(document).ready(function () {
 				imageKeys
 			},
 			success: function (data) {
-				//initChart(element_id, data);
+				initChartGroup(element_id, data);
 				console.log(element_id, data);
 			}
 		});
@@ -48,6 +48,7 @@ $(document).ready(function () {
 });
 
 let initChart = function (element_id = '', series_data = []) {
+
 	Highcharts.chart(element_id, {
 
 		title: {
@@ -93,20 +94,25 @@ let initChart = function (element_id = '', series_data = []) {
 
 };
 
-let initChartGroup = function (element_id = '', series_data = []) {
-	Highcharts.chart(element_id, {
+let initChartGroup = function (element_id = '', series_data = [], min = 50, max = 250) {
+	if (series_data[0].min) {
+		min = series_data[0].min;
+	}
 
+	if (series_data[0].max) {
+		max = series_data[0].max;
+	}
+
+	Highcharts.chart(element_id, {
 		title: {
 			text: chartTitle
 		},
-
 		subtitle: {
 			text: chartSubTitle
 		},
-
 		yAxis: {
-			max: 255,
-			min: 0,
+			max: max,
+			min: min,
 			title: {
 				text: yFeatureText
 			},
@@ -114,12 +120,7 @@ let initChartGroup = function (element_id = '', series_data = []) {
 			endOnTick: false,
 		},
 
-		series: [
-			{
-				name: chartTitle,
-				data: series_data
-			}
-		],
+		series: series_data,
 		chart: {
 			type: 'line',
 			alignTicks: false,

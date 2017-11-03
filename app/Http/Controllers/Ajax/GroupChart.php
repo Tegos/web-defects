@@ -20,15 +20,29 @@ class GroupChart extends Controller
 		}
 
 		$resultFeatures = [];
+		$imageKeysDataIndex = [];
+		$min = [];
+		$max = [];
 
 		foreach ($imageKeysData as $imageKey) {
-			$resultFeatures[$imageKey] = $featureDataOfImages[$imageKey];
+			$resultFeatures[] = $featureDataOfImages[$imageKey];
+			$imageKeysDataIndex[] = $imageKey;
+			$min[] = min($featureDataOfImages[$imageKey]);
+			$max[] = max($featureDataOfImages[$imageKey]);
 		}
 
+		$seriesData = [];
 
-		//var_dump($featureDataOfImages);
-		//$featureDataOfImages, $keys
+		for ($i = 0; $i < count($resultFeatures); $i++) {
+			$seriesData[] = [
+				'data' => $resultFeatures[$i],
+				'name' => "Частина {$imageKeysDataIndex[$i]}",
+				'min' => min($min) - 15,
+				'max' => max($max) + 15
+			];
 
-		return response()->json($resultFeatures);
+		}
+
+		return response()->json($seriesData);
 	}
 }
