@@ -41,7 +41,7 @@
 
 				<div class="row uniform">
 					<div class="12u$">
-						<h2>Інтенсивність</h2>
+						<h2>{{$algorithmData['feature']}}</h2>
 						<div class="table-wrapper">
 							<table class="table table-bordered" id="table_intensity">
 								<thead>

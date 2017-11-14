@@ -92,5 +92,67 @@ class ImageCharacteristic extends AbstractImage
 		return $intensity_columns;
 	}
 
+	/**
+	 * Return silhouette of image by column
+	 * @param int $threshold
+	 * @return array
+	 */
+	public function getSilhouetteByColumnMax($threshold = 255)
+	{
+		$image = $this->image;
+		$width = imagesx($image);
+		$height = imagesy($image);
+		$silhouetteColumns = [];
+
+		for ($column = 0; $column < $width; $column++) {
+			$concentrationArray = [];
+			for ($row = 0; $row < $height; $row++) {
+				$color_index = imagecolorat($image, $column, $row);
+				$color = imagecolorsforindex($image, $color_index); //колір пікселя
+				$concentration = round(($color['red'] + $color['green'] + $color['blue']) / 3); //концентрація
+				if ($concentration > $threshold) {
+					$concentration = self::MAX_INTENSITY;
+				}
+
+				$concentrationArray[] = $concentration;
+			}
+			$silhouette = max($concentrationArray);
+
+			$silhouetteColumns[$column] = $silhouette;
+		}
+		return $silhouetteColumns;
+	}
+
+	/**
+	 * Return silhouette of image by row
+	 * @param int $threshold
+	 * @return array
+	 */
+	public function getSilhouetteByRowMax($threshold = 255)
+	{
+		$image = $this->image;
+		$width = imagesx($image);
+		$height = imagesy($image);
+		$silhouetteColumns = [];
+
+		for ($row = 0; $row < $height; $row++) {
+			$concentrationArray = [];
+			for ($column = 0; $column < $width; $column++) {
+				$color_index = imagecolorat($image, $column, $row);
+				$color = imagecolorsforindex($image, $color_index); //колір пікселя
+				$concentration = round(($color['red'] + $color['green'] + $color['blue']) / 3); //концентрація
+				if ($concentration > $threshold) {
+					$concentration = self::MAX_INTENSITY;
+				}
+
+				$concentrationArray[] = $concentration;
+			}
+			$silhouette = max($concentrationArray);
+
+			$silhouetteColumns[$row] = $silhouette;
+		}
+		return $silhouetteColumns;
+	}
+
 
 }

@@ -71,7 +71,24 @@ class ImageHelper
 					'feature' => 'Інтенсивність',
 					'y_feature_text' => 'Середня інтенсивність',
 					'text' => 'по стовпцях',
-				]
+				],
+
+			3 =>
+				[
+					'name' => 'Силует по рядках',
+					'feature_method' => 'getSilhouetteByRowMax',
+					'feature' => 'Силует',
+					'y_feature_text' => 'Силует',
+					'text' => 'по рядках',
+				],
+			4 =>
+				[
+					'name' => 'Силует по стовцях',
+					'feature_method' => 'getSilhouetteByColumnMax',
+					'feature' => 'Силует',
+					'y_feature_text' => 'Силует',
+					'text' => 'по стовпцях',
+				],
 		];
 	}
 }
