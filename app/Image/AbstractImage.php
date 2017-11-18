@@ -25,7 +25,7 @@ abstract class AbstractImage extends ImageHelper
 		//imagefill($this->image, 0, 0, $white);
 
 		$background = imagecolorallocatealpha($image, 255, 255, 255, 0);
-		imagefill($image, 0, 0, $background);
+		//imagefill($image, 0, 0, $background);
 
 	}
 
