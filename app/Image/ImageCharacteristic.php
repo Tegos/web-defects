@@ -14,16 +14,16 @@ class ImageCharacteristic extends AbstractImage
 		$image = $this->image;
 		$width = imagesx($image);
 		$height = imagesy($image);
-		$concentration_sum = 0;
+		$intensity_sum = 0;
 		for ($hi = 0; $hi < $height; $hi++) {
 			for ($we = 0; $we < $width; $we++) {
 				$color_index = imagecolorat($image, $we, $hi);
 				$color = imagecolorsforindex($image, $color_index); //колір пікселя
-				$concentration = round(($color['red'] + $color['green'] + $color['blue']) / 3); //концентрація
-				$concentration_sum += $concentration; //загальна концентрація
+				$intensity_one = round(($color['red'] + $color['green'] + $color['blue']) / 3);
+				$intensity_sum += $intensity_one; //загальна концентрація
 			}
 		}
-		$intensity = round($concentration_sum / ($width * $height)); //інтенсивність
+		$intensity = round($intensity_sum / ($width * $height)); //інтенсивність
 
 		return $intensity;
 

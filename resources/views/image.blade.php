@@ -123,7 +123,7 @@
 												@php ( $image_key = $dataGraphIdentification[$group][1] .'x'. $dataGraphIdentification[$group][0])
 												<td class="text-center">
 													@if(isset($cropped_images[$image_key]))
-														<img height="200"
+														<img width="150"
 														     alt="{{ $cropped_images[$image_key]['image'] }}"
 														     src="{{  $cropped_images[$image_key]['image'] }}"/>
 														<div class="content">
@@ -138,6 +138,25 @@
 									</tr>
 								@endforeach
 
+								<tr>
+									<td colspan="{{count($totalDistances)}}" class="text-center">Ймовірність дефекту
+									</td>
+								</tr>
+
+								<tr>
+									@foreach ($percentDataGroups as $indexKey => $percentDataGroup)
+										<td class="text-center">
+											<div class="stat-levels">
+												<div class="{{$progressBarClasses[$percentDataGroup]}} stat-bar">
+													<span class="stat-bar-rating"
+													      style="width: {{$percentDataGroup}}%;">{{$percentDataGroup}}
+														%</span>
+												</div>
+											</div>
+											<pre><b>{{ $percentDataGroup }}%</b></pre>
+										</td>
+									@endforeach
+								</tr>
 
 								<tr>
 									<td colspan="{{count($totalDistances)}}" class="text-center">Загальна відстань у

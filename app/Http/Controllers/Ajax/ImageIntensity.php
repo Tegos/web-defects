@@ -42,8 +42,6 @@ class ImageIntensity extends Controller
 			$featureData = $imageCharacteristic->getIntensityByRow($threshold);
 		}
 
-
-		//dd($intensityByRow);
 		return response()->json($featureData);
 	}
 }

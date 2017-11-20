@@ -40,6 +40,12 @@ class ImageController extends Controller
 		);
 
 
+		$imageCharacteristic = new ImageCharacteristic();
+		$imageCharacteristic->setImage($originalImage->getImage());
+		$featureOfAllImage = $imageCharacteristic->getIntensity();
+		//dd($intensity);
+
+
 		$imageGrid->addGridToImage();
 
 		$file_path_with_grid = '/uploads/' . $id . '_grid.png';
@@ -128,7 +134,7 @@ class ImageController extends Controller
 
 		// groups
 		$groups = Matrix::getGroups($dataForDistanceCount, $numOfGroup);
-		//dd($groups);
+		$groupsOriginal = array_merge($groups);
 
 		$transpose = Matrix::transpose($groups);
 		//dd($transpose);
@@ -137,6 +143,75 @@ class ImageController extends Controller
 
 		// total distances by groups
 		$totalDistances = Matrix::getTotalDistancesByGroups($dataGraphIdentification, $dataForDistanceCount, $groups);
+
+		// percentage
+		$percentDefectData = [];
+
+		$groups = $transpose;
+		foreach ($groups as $groupData) {
+			foreach ($groupData as $group) {
+				if (isset($group)) {
+					$image_key = $dataGraphIdentification[$group][1] . 'x' . $dataGraphIdentification[$group][0];
+					$featureData = $featureDataOfImages[$image_key];
+
+					$featureData = array_slice($featureData, 10);
+					$featureData = array_slice($featureData, -10);
+
+					$diffArray = [];
+					foreach ($featureData as $feature) {
+						$diffArray[] = pow($feature - $featureOfAllImage, 2);
+					}
+
+					$min = min($diffArray);
+					$max = max($diffArray);
+					$avg = array_sum($diffArray) / count($diffArray);
+
+					$distanceSqrt = 0;
+					$distanceSqrt += $min;
+					$distanceSqrt += $max;
+					$distanceSqrt += $avg;
+
+
+					$distanceSqrt = round(sqrt($distanceSqrt), 2);
+					$percentDefectData[$image_key] = $distanceSqrt;
+				}
+
+			}
+		}
+
+		$sumDiffDistance = array_sum($percentDefectData);
+
+		$percentData = array_map(function ($diff) use ($sumDiffDistance) {
+			return round(($diff / $sumDiffDistance), 2);
+		}, $percentDefectData);
+
+		$percentDataGroups = [];
+		foreach ($groupsOriginal as $k => $groupData) {
+			$sumPercent = 0;
+			foreach ($groupData as $group) {
+				if (isset($group)) {
+					$image_key = $dataGraphIdentification[$group][1] . 'x' . $dataGraphIdentification[$group][0];
+					$sumPercent += $percentData[$image_key];
+				}
+			}
+			$percentDataGroups[$k] = round($sumPercent * 100);
+		}
+
+		$progressBarClasses = [];
+
+		for ($i = 0; $i < 99; $i++) {
+			if ($i < 10) {
+				$class = 'stat-3';
+			} elseif ($i < 40) {
+				$class = 'stat-2';
+			} else {
+				$class = 'stat-1';
+			}
+			$progressBarClasses[$i] = $class;
+		}
+
+		//var_dump($percentDataGroups);
+
 
 		$data = [];
 		$data['image'] = $image_data;
@@ -152,6 +227,11 @@ class ImageController extends Controller
 		$data['dataGraphIdentification'] = $dataGraphIdentification;
 
 		$data['groups'] = $groups;
+
+		$data['percentDataGroups'] = $percentDataGroups;
+
+		$data['progressBarClasses'] = $progressBarClasses;
+
 		$data['groups'] = $transpose;
 
 		$data['numOfGroup'] = $numOfGroup;
