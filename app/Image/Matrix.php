@@ -46,7 +46,11 @@ class Matrix
 			$localMins = [];
 			for ($i = 0; $i < $num; $i++) {
 				if (!in_array($i, $group)) {
-					$localMins[$i] = min(array_filter($distanceMatrix[$i]));
+					$array = array_filter($distanceMatrix[$i]);
+					if (count($array) < 2) {
+						$array[] = 1;
+					}
+					$localMins[$i] = min($array);
 				}
 			}
 
