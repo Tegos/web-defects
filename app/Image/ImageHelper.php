@@ -83,7 +83,7 @@ class ImageHelper
 				],
 			4 =>
 				[
-					'name' => 'Силует по стовцях',
+					'name' => 'Силует по стовпцях',
 					'feature_method' => 'getSilhouetteByColumnMax',
 					'feature' => 'Силует',
 					'y_feature_text' => 'Силует',

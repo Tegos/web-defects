@@ -105,11 +105,11 @@
 					<div class="12u$">
 						<h2>Виділені підгрупи</h2>
 						<div class="table-wrapper">
-							<table class="table table-bordered matrix_table" id="table_matrix_distance">
+							<table class="table table-bordered" id="table_groups">
 								<thead>
 								<tr>
 									@for ($n = 0; $n < $numOfGroup; $n++)
-										<th class="text-center">Група {{$n+1}}</th>
+										<th width="{{floor(100/$numOfGroup)}}%" class="text-center">Група {{$n+1}}</th>
 									@endfor
 								</tr>
 								</thead>
@@ -123,7 +123,7 @@
 												@php ( $image_key = $dataGraphIdentification[$group][1] .'x'. $dataGraphIdentification[$group][0])
 												<td class="text-center">
 													@if(isset($cropped_images[$image_key]))
-														<img width="150"
+														<img width="{{floor(100/$numOfGroup)}}%"
 														     alt="{{ $cropped_images[$image_key]['image'] }}"
 														     src="{{  $cropped_images[$image_key]['image'] }}"/>
 														<div class="content">

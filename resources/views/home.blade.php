@@ -2,14 +2,12 @@
 
 <!-- Sidebar -->
 <section id="sidebar">
+	<h3 class="hidden">Sidebar</h3>
 	<div class="inner">
 		<nav>
 			<ul>
 				<li><a href="/">Головна</a></li>
 				<li><a href="#intro">Вибір файлу</a></li>
-				<!--li><a href="#one">Who we are</a></li>
-				<li><a href="#two">What we do</a></li>
-				<li><a href="#three">Get in touch</a></li-->
 			</ul>
 		</nav>
 	</div>
@@ -104,7 +102,7 @@
 
 			<ul class="actions">
 				<li>
-					<button id="loadImage" href="" class="button">Далі</button>
+					<button id="loadImage" class="button">Далі</button>
 				</li>
 			</ul>
 		</div>
