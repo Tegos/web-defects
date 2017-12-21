@@ -206,19 +206,37 @@
 					</div>
 				</div>
 
-			</section>
+				@if($needHighlight)
+					<div class="row uniform">
+						<div class="12u$">
+							<h2>Виділення груп з дефектами</h2>
+							<div class="table-wrapper">
+								<table class="table table-bordered" id="table_highlight">
+									<tbody>
 
-			<div class="row uniform">
-				<div class="12u$">
-					{{--<div class="inner">--}}
-					{{--<ul class="actions">--}}
-					{{--<li>--}}
-					{{--<button class="button scrolly">Далі</button>--}}
-					{{--</li>--}}
-					{{--</ul>--}}
-					{{--</div>--}}
-				</div>
-			</div>
+									@for ($i = 0; $i < $m; $i++)
+										<tr>
+											@for ($j = 0; $j < $n; $j++)
+												@php ( $image_key = $i .'x'. $j)
+												<td class="text-center {{in_array($image_key, $dangerSegment)?'danger_segment':''}}">
+													@if(isset($cropped_images[$image_key]))
+														<img class="" alt="{{ $cropped_images[$image_key]['image'] }}"
+														     src="{{  $cropped_images[$image_key]['image'] }}"/>
+													@endif
+												</td>
+											@endfor
+										</tr>
+									@endfor
+
+									</tbody>
+								</table>
+							</div>
+
+						</div>
+					</div>
+				@endif
+
+			</section>
 
 		</div>
 

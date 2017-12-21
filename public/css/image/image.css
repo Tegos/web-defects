@@ -140,3 +140,25 @@ body {
 pre * {
 	color: black !important;
 }
+
+#table_highlight {
+	width: min-content;
+	border: none;
+	border-collapse: separate;
+	border-spacing: 0;
+}
+
+.danger_segment {
+	border: 3px solid #dc3545 !important;
+	border-left: 3px solid #dc3545 !important;
+}
+
+#table_highlight td {
+	padding: 0 !important;
+	line-height: 0 !important;
+	border: 3px solid transparent;
+}
+
+#table_highlight tr {
+	border: none;
+}

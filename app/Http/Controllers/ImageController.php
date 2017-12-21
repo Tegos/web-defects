@@ -156,22 +156,26 @@ class ImageController extends Controller
 						$image_key = $dataGraphIdentification[$group][1] . 'x' . $dataGraphIdentification[$group][0];
 						$featureData = $featureDataOfImages[$image_key];
 
-						$featureData = array_slice($featureData, 10);
-						$featureData = array_slice($featureData, -10);
+						//$featureData = array_slice($featureData, 10);
+						//$featureData = array_slice($featureData, -10);
+						$averageForGroup = array_sum($featureData) / count($featureData);
 
 						$diffArray = [];
 						foreach ($featureData as $feature) {
-							$diffArray[] = pow($feature - $featureOfAllImage, 2);
+							$diffArray[] = pow($feature - $averageForGroup, 2);
 						}
+
+						//var_dump($diffArray);
+
 
 						$min = min($diffArray);
 						$max = max($diffArray);
-						$avg = array_sum($diffArray) / count($diffArray);
+						//$avg = array_sum($diffArray) / count($diffArray);
 
 						$distanceSqrt = 0;
 						$distanceSqrt += $min;
 						$distanceSqrt += $max;
-						$distanceSqrt += $avg;
+						//$distanceSqrt += $avg;
 
 
 						$distanceSqrt = round(sqrt($distanceSqrt), 2);
@@ -215,7 +219,42 @@ class ImageController extends Controller
 				$progressBarClasses[$i] = $class;
 			}
 
-			//var_dump($percentDataGroups);
+			// for highlight red group
+			$minPercent = 40;
+			$needHighlight = false;
+			foreach ($percentDataGroups as $percentDataGroup) {
+				if ($percentDataGroup > $minPercent) {
+					$needHighlight = true;
+					break;
+				}
+			}
+			$dangerGroups = [];
+			$dangerSegment = [];
+			if ($needHighlight) {
+				foreach ($percentDataGroups as $number => $percentDataGroup) {
+					if ($percentDataGroup > $minPercent) {
+						$dangerGroups[] = $number;
+					}
+				}
+
+				//dd($dangerGroups);
+				//dd($groupsOriginal);
+				foreach ($groupsOriginal as $numberOfGroup => $groupData) {
+					foreach ($groupData as $group) {
+						if (in_array($numberOfGroup, $dangerGroups)) {
+							if (isset($group)) {
+								$image_key = $dataGraphIdentification[$group][1] . 'x' . $dataGraphIdentification[$group][0];
+
+								$dangerSegment[] = $image_key;
+							}
+						}
+					}
+				}
+
+				//dd($dangerSegment);
+			}
+
+			//dd($needHighlight);
 
 
 			$data = [];
@@ -246,11 +285,14 @@ class ImageController extends Controller
 
 			$data['totalDistances'] = $totalDistances;
 
+			$data['dangerSegment'] = $dangerSegment;
+			$data['needHighlight'] = $needHighlight;
+
 			$data['featureDataOfImages'] = json_encode($featureDataOfImages);
 
 
 			return view('image', $data);
-		}catch (\Exception $exception){
+		} catch (\Exception $exception) {
 			abort(404);
 			//throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 		}
