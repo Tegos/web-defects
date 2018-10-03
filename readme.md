@@ -34,20 +34,20 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Results
 
-<img src="readme/results/2.jpg" width="50%" alt="result_2"/>
-<img src="readme/results/3.jpg" width="50%" alt="result_3"/>
+<img src="readme/results/2.jpg" width="49%" alt="result_2"/>
+<img src="readme/results/3.jpg" width="49%" alt="result_3"/>
 <br/>
-<img src="readme/results/4.jpg" width="50%" alt="result_4"/>
-<img src="readme/results/5.jpg" width="50%" alt="result_5"/>
+<img src="readme/results/4.jpg" width="49%" alt="result_4"/>
+<img src="readme/results/5.jpg" width="49%" alt="result_5"/>
 <br/>
-<img src="readme/results/6.jpg" width="50%" alt="result_6"/>
-<img src="readme/results/7.jpg" width="50%" alt="result_7"/>
+<img src="readme/results/6.jpg" width="49%" alt="result_6"/>
+<img src="readme/results/7.jpg" width="49%" alt="result_7"/>
 <br/>
-<img src="readme/results/8.jpg" width="50%" alt="result_8"/>
-<img src="readme/results/9.jpg" width="50%" alt="result_9"/>
+<img src="readme/results/8.jpg" width="49%" alt="result_8"/>
+<img src="readme/results/9.jpg" width="49%" alt="result_9"/>
 <br/>
-<img src="readme/results/10.jpg" width="50%" alt="result_10"/>
-<img src="readme/results/11.jpg" width="50%" alt="result_11"/>
+<img src="readme/results/10.jpg" width="49%" alt="result_10"/>
+<img src="readme/results/11.jpg" width="49%" alt="result_11"/>
 
 ## Demo
 
