@@ -4,19 +4,19 @@
 
 function readURL(input) {
 
-	if (input.files && input.files[0]) {
-		let reader = new FileReader();
+    if (input.files && input.files[0]) {
+        let reader = new FileReader();
 
-		reader.onload = function (e) {
-			let img = $('#preview_image');
-			img.attr('src', e.target.result);
-			img.show();
-		};
+        reader.onload = function (e) {
+            let img = $('#preview_image');
+            img.attr('src', e.target.result);
+            img.show();
+        };
 
-		reader.readAsDataURL(input.files[0]);
-	}
+        reader.readAsDataURL(input.files[0]);
+    }
 }
 
 $("#imgInp").change(function () {
-	readURL(this);
+    readURL(this);
 });

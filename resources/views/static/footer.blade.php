@@ -1,14 +1,14 @@
 <!-- Footer -->
 <footer id="footer" class="wrapper style1-alt">
-	<div class="inner">
-		<ul class="menu">
-			<li>&copy; Михавко Іван</li>
-			<li>Web Defect</li>
-			<li>
-				<?= date('Y'); ?>
-			</li>
-		</ul>
-	</div>
+    <div class="inner">
+        <ul class="menu">
+            <li>&copy; Михавко Іван</li>
+            <li>Web Defect</li>
+            <li>
+                <?= date('Y'); ?>
+            </li>
+        </ul>
+    </div>
 </footer>
 
 <!-- Scripts -->

@@ -5,5 +5,5 @@
 
 
 $('#loadImage').click(function () {
-	$('#formImage').submit();
+    $('#formImage').submit();
 });
