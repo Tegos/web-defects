@@ -14,7 +14,7 @@
     "babel-loader": "^7.1.4",
     "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
     "babel-preset-env": "^1.7.0",
-    "cross-env": "^5.0.1",
+    "cross-env": "latest",
     "jquery": "latest",
     "laravel-mix": "^2.x.x",
     "webpack-cli": "^3.1.2",
