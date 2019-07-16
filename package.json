@@ -17,6 +17,7 @@
     "cross-env": "latest",
     "jquery": "latest",
     "laravel-mix": "^2.x.x",
+    "lodash": "latest",
     "webpack-cli": "^3.1.2",
     "webpack-dev-server": "^3.1.11"
   }
