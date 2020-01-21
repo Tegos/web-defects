@@ -19,6 +19,7 @@
     "js-yaml": "^3.13.1",
     "laravel-mix": "^2.x.x",
     "lodash": "latest",
+    "serialize-javascript": "latest",
     "webpack-cli": "^3.1.2",
     "webpack-dev-server": "^3.1.11"
   }
