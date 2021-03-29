@@ -2,19 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use \App\Image\ImageGrid;
+use App\Image\ImageGrid;
 
 class HomeController extends Controller
 {
+	public function index()
+	{
+		$data = [];
+		$algorithms = ImageGrid::getAlgorithms();
 
-    public function index()
-    {
-        $data = [];
-        $algorithms = ImageGrid::getAlgorithms();
+		$data['algorithms'] = $algorithms;
 
-        $data['algorithms'] = $algorithms;
-
-        return view('home', $data);
-    }
+		return view('home', $data);
+	}
 
 }
